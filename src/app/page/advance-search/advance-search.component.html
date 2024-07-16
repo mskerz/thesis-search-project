@@ -1,0 +1,20 @@
+<div class="hero">
+    <h1>Advacnced Search</h1>
+    <p>ค้นหาแบบขั้นสูง</p>
+  </div>
+  
+<div class="container mt-3 d-flex justify-content-center">
+    <div class="col-6 ">
+        <div class="input-group mb-3 ">
+            <input type="text" class="form-control" [(ngModel)]="termquery" placeholder="ค้นหาคำในเอกสารทั้งหมด" />
+            
+
+        
+        </div>
+        <button class="btn btn-secondary"  ><i class="bi bi-search fs-6" style="color: #46E57D;"></i> ค้นหา</button>
+        <div class="mt-1">
+            <p class="text-black-50 fs-6" style="display: none;">ผลการค้นหา 10 รายการ</p>
+        </div>
+    </div>
+    
+</div>

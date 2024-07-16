@@ -1,0 +1,19 @@
+<div class="container" >
+    
+    <div class="border-box col-5 mx-auto" style="margin-top: 94px;">
+            <p class="text-center fs-3 "><i class="bi bi-person-fill text-success"></i> แก้ไขข้อมูลส่วนตัว</p>
+            <form  (ngSubmit)="onSubmit()"  >
+                <label class="form-label" for="email">อีเมล</label>
+                <input class="form-control" type="email" placeholder="Email" [(ngModel)]="info.email" [ngModelOptions]="{standalone: true}">
+                <div class="mt-1"> 
+                    <label class="form-label">ชื่อ</label>
+                    <input class="form-control" type="text" placeholder="Firstname" [(ngModel)]="info.firstname" [ngModelOptions]="{standalone: true}">
+                    <label class="form-label">นามสกุล</label>
+                    <input class="form-control" type="text"  placeholder="Lastname"  [(ngModel)]="info.lastname"  [ngModelOptions]="{standalone: true}">
+                </div>
+                  
+                <button type="submit" class="btn btn-success d-block mt-3 mx-auto">แก้ไข</button>
+            </form>
+    </div>
+
+</div>

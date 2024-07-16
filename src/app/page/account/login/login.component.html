@@ -1,0 +1,21 @@
+<div class="container" >
+    
+    <div class="border-login col-5 mx-auto" style="margin-top: 94px;">
+            <p class="text-center fs-3 ">เข้าสู่ระบบ</p>
+            <form   (ngSubmit)="onSubmit()" >
+                <label class="form-label" for="email">อีเมล</label>
+                <input class="form-control" type="email" [(ngModel)]="form_login.email" [ngModelOptions]="{standalone: true}">
+                <label class="form-label" for="password">รหัสผ่าน</label>
+                <input class="form-control col-1" type="password" [(ngModel)]="form_login.password" [ngModelOptions]="{standalone: true}">
+                <div class="d-flex flex-column">
+                    
+                    <div class="d-flex flex-row justify-content-between">
+                        <div>ยังไม่สมัครสมาชิก ?<a routerLink="/register" style="color: rgb(37, 184, 108); cursor: pointer;text-decoration: none;">คลิก</a></div>
+                        <a routerLink="/forgot-password" style="cursor: pointer;text-decoration: none;">ลืมรหัสผ่าน ?</a>
+                    </div>
+                    <button type="submit" class="btn btn-success d-block mt-3"> Login</button>
+                </div>
+            </form>
+    </div>
+
+</div>

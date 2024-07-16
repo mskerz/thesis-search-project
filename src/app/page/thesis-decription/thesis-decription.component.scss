@@ -1,0 +1,28 @@
+.border-detail{
+    border-radius: 5px;
+    padding: 20px;
+    background-color: rgb(213, 213, 213);
+}
+
+.card-header{
+    background-color: #E3E3E3 !important;
+}
+
+.align-text {
+    text-align: justify;
+  }
+  .btn {
+    background-color: rgb(47, 170, 90);
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 15px;
+  }
+  
+  /* Darker background on mouse-over */
+  .btn:hover {
+    background-color: rgb(39, 160, 82);
+    color: white;
+
+  }

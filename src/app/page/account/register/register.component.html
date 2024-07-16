@@ -1,0 +1,27 @@
+<div class="container" >
+    
+    <div class="border-register col-5 mx-auto" style="margin-top: 94px;">
+            <p class="text-center fs-3 "><i class="bi bi-person-fill text-success"></i> สมัครสมาชิกสำหรับนิสิต</p>
+            <form   action="" (ngSubmit)="onSubmit()" >
+                <label class="form-label" for="email">อีเมล</label>
+                <input class="form-control" type="email" [(ngModel)]="form_register.email" [ngModelOptions]="{standalone: true}">
+                <label class="form-label" for="password">รหัสผ่าน</label>
+                <input class="form-control col-1" type="password" [(ngModel)]="form_register.password" [ngModelOptions]="{standalone: true}" >
+                <label class="form-label" for="password">ยืนยันรหัสผ่าน</label>
+                <input class="form-control col-1" type="password" [(ngModel)]="form_register.confirm_password" [ngModelOptions]="{standalone: true}">
+                <div class="d-flex flex-row justify-content-between">
+                    <div class="grid-item">
+                      <label class="form-label">ชื่อ</label>
+                      <input class="form-control" type="text" [(ngModel)]="form_register.firstname" [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <div class="grid-item">
+                      <label class="form-label">นามสกุล</label>
+                      <input class="form-control" type="text" [(ngModel)]="form_register.lastname" [ngModelOptions]="{standalone: true}">
+                    </div>
+                </div>
+                  
+                <button type="submit" class="btn btn-success d-block mt-3 mx-auto">Sign Up</button>
+            </form>
+    </div>
+
+</div>

@@ -1,0 +1,54 @@
+<div class="container" style="margin-top:100px;">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="card-title fs-5">รายละเอียดปริญญานิพนธ์</h5>
+    </div>
+    <div class="card-body">
+      <table class="table table-borderless"> <!-- เพิ่ม class ของ table และ table-borderless เพื่อไม่ให้แสดงเส้นขอบ -->
+        <tbody>
+          <tr>
+            <th scope="row" class="fw-bold">หัวข้อ:</th>
+            <td>{{ this.SelectedThesis?.title_th }}</td>
+          </tr>
+          <tr>
+            <th scope="row" class="fw-bold" style="white-space: nowrap;">หัวข้อ (Other):</th>
+            <td>{{ this.SelectedThesis?.title_en }}</td>
+          </tr>
+          <tr>
+            <th scope="row" class="fw-bold">ผู้เขียน:</th>
+            <td>{{ this.SelectedThesis?.author_name }}</td>
+          </tr>
+          <tr>
+            <th scope="row" class="fw-bold" style="white-space: nowrap;">อาจารย์ที่ปรึกษา:</th>
+            <td>{{ this.SelectedThesis?.advisor_name }}</td>
+          </tr>
+          <tr>
+            <th scope="row" class="fw-bold">ปีการศึกษา:</th>
+            <td>{{ this.SelectedThesis?.year }}</td>
+          </tr>
+          <tr>
+            <th scope="row" class="fw-bold">URL:</th>
+            <td><a href="{{url}}" style="text-decoration: none;color: rgb(29, 194, 81);">{{url}}</a></td>
+          </tr>
+          <tr>
+            <th scope="row" class="fw-bold">บทคัดย่อ:</th>
+            <td style="max-width: 50%;">{{ this.SelectedThesis?.abstract }}</td> <!-- เพิ่ม max-width เพื่อกำหนดความกว้างสูงสุด -->
+          </tr>
+          <tr *ngIf="(loggedIn|async)">
+            <th scope="row" class="fw-bold" ><i class="bi bi-file-earmark-pdf" ></i> ไฟล์</th>
+            
+
+            <td style="max-width: 50%;"><button class="btn" (click)="Download_PDF(this.SelectedThesis?.doc_id)"><i class="bi bi-download"></i> Download</button></td> <!-- เพิ่ม max-width เพื่อกำหนดความกว้างสูงสุด -->
+          </tr>
+          <tr *ngIf="!(loggedIn|async)">
+            <th scope="row" class="fw-bold" ></th>
+            
+
+            <td style="max-width: 50%;"><a  routerLink="/login"  style="color: rgb(16, 203, 97);text-decoration: none;">เข้าสู่ระบบ
+            </a>&nbsp;<label style="color: rgb(57, 57, 57);">เพื่อดาวน์โหลดไฟล์ !</label></td> <!-- เพิ่ม max-width เพื่อกำหนดความกว้างสูงสุด -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

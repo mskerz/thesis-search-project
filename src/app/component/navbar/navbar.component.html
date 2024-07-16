@@ -1,0 +1,69 @@
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(47, 170, 90);">
+  <div class="container-fluid">
+    <a class="navbar-brand" style="font-size: 30px;" routerLink="/simple-search">CS@Thesis</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/simple-search">ค้นหาแบบง่าย</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/advance-search">ค้นหาขั้นสูง</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav" style="margin-left: auto;" *ngIf="!(loggedIn|async)">
+        <li class="nav-item"  >
+          <a class="nav-link" routerLink="/login" style="color: rgb(255, 255, 255); text-decoration: none;">
+            <i class="bi bi-box-arrow-in-right"></i> Login
+          </a>
+        </li>
+        <li class="nav-item"  >
+          <a class="nav-link" routerLink="/register" style="color: rgb(255, 255, 255); text-decoration: none;">
+            <i class="bi bi-person-fill"></i> Signup
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav" style="margin-left: auto;" *ngIf="(loggedIn|async)">
+        <a class="nav-link" mat-menu-trigger [matMenuTriggerFor]="userMenu" style="color: rgb(255, 255, 255); text-decoration: none; cursor: pointer;">
+          <i class="bi bi-person"></i> {{ userRole === 0 ? 'นิสิต' : 'ผู้ดูแลระบบ' }}
+        </a>
+        <li class="nav-item">
+          <mat-menu #userMenu="matMenu">
+            <mat-card class="user-card " >
+              <mat-card-content>
+                <div>{{ currentUser?.firstname }} - {{ currentUser?.lastname }}</div>
+                <div>{{currentUser?.email}}</div>
+              </mat-card-content>
+            </mat-card>            <button mat-menu-item routerLink="/accoount/change-info">
+              <span><i class="bi bi-info-circle"></i> แก้ไขข้อมูลส่วนตัว</span>
+            </button>
+            <button mat-menu-item routerLink="/account/change-password">
+              <span><i class="bi bi-lock"></i> เปลี่ยนรหัสผ่าน</span>
+            </button>
+
+            <button mat-menu-item  *ngIf="userRole==1" routerLink="/account/admin/advisors-manage">
+              <i class="bi bi-list"></i> ข้อมูลอาจารย์ที่ปรึกษา
+            </button>
+            <button mat-menu-item  *ngIf="userRole==1">
+              <i class="bi bi-list-check"></i> ตรวจสอบการนำเข้าปริญญานิพนธ์
+            </button>
+            <button mat-menu-item  *ngIf="userRole==1">
+              <i class="bi bi-asterisk"></i> เปลี่ยนสิทธิ์การใช้งานผู้ใช้
+            </button>
+            <button mat-menu-item  *ngIf="userRole==0" routerLink="/account/student/import-thesis">
+              <i class="bi bi-upload"></i> อัพโหลดปริญญานิพนธ์
+            </button>
+            <button mat-menu-item (click)="logout()">
+              <i class="bi bi-box-arrow-right"></i> Logout
+            </button>
+          </mat-menu>
+
+        </li>
+      </ul>
+      
+    </div>
+  </div>
+</nav>
+

@@ -1,0 +1,22 @@
+.hero {
+    background-color: rgb(163, 163, 163);/* เปลี่ยนเป็น URL ของรูปภาพที่คุณต้องการให้เป็นพื้นหลัง */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 30px ; /* ปรับขนาดพื้นที่ของ Hero ตามความเหมาะสม */
+  }
+  
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  
+  .hero p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+  }
+
+  .btn-secondary{
+    background-color: #707070 !important;
+  }

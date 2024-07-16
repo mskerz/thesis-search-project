@@ -1,0 +1,14 @@
+<h2 mat-dialog-title style="margin-bottom: 0px !important;">เพิ่มอาจารย์ที่ปรึกษาใหม่</h2>
+<form action="" (ngSubmit)="newAdvisor()">
+    <div mat-dialog-content>
+        <label class="form-label" for="email">ชื่ออาจารย์ที่ปรึกษา</label>
+        <input class="form-control" type="email" [(ngModel)]="advisor.advisor_name" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">ยกเลิก</button>
+        <button type="submit" mat-button   color="secondary" cdkFocusInitial >เพิ่ม</button>
+    </div>
+
+</form>
+
+
