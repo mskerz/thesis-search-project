@@ -96,7 +96,7 @@
         [rows]="rowsPerPage"
         [totalRecords]="thesisLength"
         (onPageChange)="onPageChange($event)"
-        
+        *ngIf="thesisLength!=0"
       ></p-paginator>
     </div>
   </div>
