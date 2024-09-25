@@ -10,4 +10,13 @@
     box-shadow: none;
     padding: 0.5em; /* คุณสามารถปรับการจัดเรียงได้ตามที่ต้องการ */
 }
-  
+
+.logo {
+    background-image: url('./../../../assets/image/logo.png');
+    background-size: contain; /* ทำให้ภาพย่อให้พอดีกับขนาดที่กำหนด */
+    background-repeat: no-repeat; /* ไม่ให้ภาพซ้ำ */
+    background-position: center; /* จัดตำแหน่งภาพตรงกลาง */
+    width: 100px; /* ปรับขนาดความกว้างของโลโก้ */
+    height: 40px; /* ปรับขนาดความสูงของโลโก้ */
+    display: inline-block; /* ทำให้โลโก้แสดงในบรรทัดเดียวกับข้อความ */
+}

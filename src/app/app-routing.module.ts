@@ -14,6 +14,8 @@ import { ForgotPasswordSendTokenComponent } from './page/account/reset-password/
 import { ForgotPasswordNewPasswordComponent } from './page/account/reset-password/forgot-password-new-password/forgot-password-new-password.component';
 import { AuthGuard } from './guard/auth-guard.guard';
 import { ManageAdvisorComponent } from './page/role/admin/manage-advisor/manage-advisor.component';
+import { ManageThesisComponent } from './page/role/admin/manage-thesis/manage-thesis.component';
+import { ManageStudentComponent } from './page/role/admin/manage-student/manage-student.component';
 const routes: Routes = [
   {path :'',component:RootComponent,children:[
     {path:'',component:SimpleSearch},
@@ -30,7 +32,9 @@ const routes: Routes = [
     {path:'forgot-password',component:ForgotPasswordSendEmailComponent,title:'ลืมรหัสผ่าน'},
     {path:'send-token',component:ForgotPasswordSendTokenComponent,title:'รหัสยืนยัน'},
     {path:'reset-password', component:ForgotPasswordNewPasswordComponent,title:'ตั้งรหัสผ่านใหม่',canActivate: [AuthGuard]},
-    {path:'account/admin/advisors-manage',component:ManageAdvisorComponent,title:'อาจารย์ที่ปรึกษาปริญญานิพนธ์'}
+    {path:'account/admin/advisors-manage',component:ManageAdvisorComponent,title:'อาจารย์ที่ปรึกษาปริญญานิพนธ์'},
+    {path:'account/admin/thesis-upload',component:ManageThesisComponent,title:'รายการปริญญานิพนธ์ที่ต้องตรวจสอบ'},
+    {path:'account/admin/student',component:ManageStudentComponent,title:'สิทธิการใช้งาน'}
   ]}
 ];
 

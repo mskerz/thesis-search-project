@@ -12,10 +12,10 @@ import Swal from 'sweetalert2';
 export class LoginComponent {
   
   form_login ={
-    email :'',
-    password: ''
+    email :'wichasin.s@gmail.com',
+    password: '12345678'
   }
-  constructor(private http: HttpClient, private router: Router, private authService: AuthService) {
+  constructor( private router: Router, private authService: AuthService) {
   
   }
 

@@ -14,11 +14,12 @@ export class SearchService {
 
 
   SimpleSearch(field:string,query:string): Observable<ThesisList[]>{
-    return this.http.get<ThesisList[]>(`${this.auth.getEndpoint()}/user/simple-search/${field}/${query}`)
+    return this.http.get<ThesisList[]>(`${this.auth.getEndpoint()}/simple-search/${field}/${query}`)
   }
 
   AdvancedSearch(query: string){
-   
+    return this.http.get<ThesisList[]>(`${this.auth.getEndpoint()}/advanced-search?query=${encodeURIComponent(query)}`)
+
   }
 
   ThesisDecription(doc_id:number): Observable<Thesis>{

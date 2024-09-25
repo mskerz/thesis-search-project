@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(47, 170, 90);">
   <div class="container-fluid">
-    <a class="navbar-brand" style="font-size: 30px;" routerLink="/simple-search">CS@Thesis</a>
+    <a class="navbar-brand" style="font-size: 30px;" routerLink="/simple-search">
+      <span class="logo"></span> <!-- โลโก้จะถูกแทรกที่นี่ -->
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -46,14 +48,14 @@
             <button mat-menu-item  *ngIf="userRole==1" routerLink="/account/admin/advisors-manage">
               <i class="bi bi-list"></i> ข้อมูลอาจารย์ที่ปรึกษา
             </button>
-            <button mat-menu-item  *ngIf="userRole==1">
+            <button mat-menu-item  *ngIf="userRole==1" routerLink="/account/admin/thesis-upload">
               <i class="bi bi-list-check"></i> ตรวจสอบการนำเข้าปริญญานิพนธ์
             </button>
-            <button mat-menu-item  *ngIf="userRole==1">
+            <button mat-menu-item  *ngIf="userRole==1" routerLink="/account/admin/student">
               <i class="bi bi-asterisk"></i> เปลี่ยนสิทธิ์การใช้งานผู้ใช้
             </button>
-            <button mat-menu-item  *ngIf="userRole==0" routerLink="/account/student/import-thesis">
-              <i class="bi bi-upload"></i> อัพโหลดปริญญานิพนธ์
+            <button mat-menu-item *ngIf="userRole == 0" routerLink="/account/student/import-thesis">
+              <i class="bi bi-upload"></i> {{ hasThesis ? 'แก้ไขปริญญานิพนธ์' : 'อัพโหลดปริญญานิพนธ์' }}
             </button>
             <button mat-menu-item (click)="logout()">
               <i class="bi bi-box-arrow-right"></i> Logout

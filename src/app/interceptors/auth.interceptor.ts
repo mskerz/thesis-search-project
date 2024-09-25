@@ -36,16 +36,17 @@ export class AuthInterceptor implements HttpInterceptor {
         
         if (error.status === 401) {
           // If a 401 Unauthorized response is returned, log out the user
-          Swal.fire({
-            title: 'Session Expired',
-            text: 'Redirect to Login Page',
-            timer:2000,
-            didOpen: () => {
-              Swal.showLoading();
-            }
-          }).then(() => {
-            this.authService.logout();// Navigate after Swal is closed
-          });
+          this.authService.logout();
+          // Swal.fire({
+          //   title: 'Session Expired',
+          //   text: 'กำลังกลับไปที่หน้าเข้าสู่ระบบ',
+          //   timer:2000,
+          //   didOpen: () => {
+          //     Swal.showLoading();
+          //   }
+          // }).then(() => {
+          //   this.authService.logout();// Navigate after Swal is closed
+          // });
         }
         return throwError(()=>error);
       })

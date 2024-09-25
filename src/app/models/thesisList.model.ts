@@ -6,6 +6,8 @@ export interface ThesisList{
     author_name:string;
     advisor_name:string;
     year:number;
+    tf_idf_score?: number|undefined; // Optional field
+
 }
 
 export class ThesisListConvert {

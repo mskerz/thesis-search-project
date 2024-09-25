@@ -23,7 +23,7 @@ export class ForgotPasswordNewPasswordComponent implements OnInit {
     // Retrieve the reset token from the URL
     this.route.queryParams.subscribe(params => {
       this.reset_token = params['reset_token'];
-      console.log(this.reset_token); // Display the reset token in the console
+      // console.log(this.reset_token); // Display the reset token in the console
     });
   }
   togglePasswordVisibility(input: HTMLInputElement, inputType: string) {

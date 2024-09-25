@@ -1,1 +1,92 @@
-<p>manage-thesis works!</p>
+<div class="container">
+  <mat-card class="mt-5">
+    <mat-card-content>
+      <h2>รายการปริญญานิพนธ์</h2>
+      <table
+        mat-table
+        [dataSource]="paginatedData"
+      >
+        <!-- Index Column -->
+        
+
+        <ng-container matColumnDef="idx">
+          <th mat-header-cell *matHeaderCellDef>ลำดับ</th>
+          <td mat-cell *matCellDef="let document">{{ document.idx }}</td>
+        </ng-container>
+
+        <!-- Title Column -->
+        <ng-container matColumnDef="title_th">
+          <th mat-header-cell *matHeaderCellDef>หัวข้อ</th>
+          <td mat-cell *matCellDef="let document">
+            <a
+              class="text-decoration-none text-dark"
+              [style]="{ cursor: 'pointer' }"
+              (click)="
+                openLinkInNewTab('/decription/thesis/' + document.doc_id)
+              "
+              >{{ document.title_th }}</a
+            >
+          </td>
+        </ng-container>
+
+        <!-- Author Name Column -->
+        <ng-container matColumnDef="author_name">
+          <th mat-header-cell *matHeaderCellDef>ผู้เขียน</th>
+          <td mat-cell *matCellDef="let document">
+            {{ document.author_name }}
+          </td>
+        </ng-container>
+
+        <!-- Advisor Name Column -->
+        <ng-container matColumnDef="advisor_name">
+          <th mat-header-cell *matHeaderCellDef>อาจารย์ที่ปรึกษา</th>
+          <td mat-cell *matCellDef="let document">
+            {{ document.advisor_name }}
+          </td>
+        </ng-container>
+
+        <!-- Recheck Status Column -->
+        <ng-container matColumnDef="recheck_status">
+          <th mat-header-cell *matHeaderCellDef>สถานะเอกสาร</th>
+          <td mat-cell *matCellDef="let document">
+            <ng-container *ngIf="!isEditing[document.doc_id]; else editMode">
+              <p-tag [severity]="getSeverity(document.recheck_status)" [value]="check(document.recheck_status)"  (click)="canEditStatus(document.recheck_status) && toggleEdit(document.doc_id)" />
+               
+            </ng-container>
+
+            <ng-template #editMode pTemplate="body"  >
+              <p-dropdown
+                  [options]="statusOptions"
+                  [(ngModel)]="document.recheck_status"
+                  (onChange)="ConfirmRecheck(document.doc_id, $event.value)"
+                  appendTo="body"
+                ></p-dropdown>
+            </ng-template>
+          </td>
+        </ng-container>
+
+        <!-- File Name Column -->
+        <ng-container matColumnDef="file_name">
+          <th mat-header-cell *matHeaderCellDef>Preview</th>
+          <td mat-cell *matCellDef="let document">
+            
+            <a (click)="OpenPreview(document.doc_id)">
+              <img src="./../../../../../assets/image/pdf_thumnail.png" alt="Preview" class="thumbnail"/>
+            </a>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+
+      <!-- Pagination controls -->
+      <p-paginator
+        [rows]="rowsPerPage"
+        [totalRecords]="totalRecords"
+        (onPageChange)="onPageChange($event)"
+        
+      ></p-paginator>
+    </mat-card-content>
+  </mat-card>
+</div>

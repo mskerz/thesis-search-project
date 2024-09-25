@@ -1,22 +1,53 @@
 .hero {
-    background-color: rgb(163, 163, 163);/* เปลี่ยนเป็น URL ของรูปภาพที่คุณต้องการให้เป็นพื้นหลัง */
-    background-size: cover;
-    background-position: center;
-    color: white;
-    text-align: center;
-    padding: 30px ; /* ปรับขนาดพื้นที่ของ Hero ตามความเหมาะสม */
-  }
-  
-  .hero h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-  }
-  
-  .hero p {
-    font-size: 1.5rem;
-    margin-bottom: 30px;
-  }
+  background-color: rgb(
+    163,
+    163,
+    163
+  ); /* เปลี่ยนเป็น URL ของรูปภาพที่คุณต้องการให้เป็นพื้นหลัง */
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  padding: 30px; /* ปรับขนาดพื้นที่ของ Hero ตามความเหมาะสม */
+}
 
-  .btn-secondary{
-    background-color: #707070 !important;
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+}
+
+.btn-secondary {
+  background-color: #707070 !important;
+}
+
+.autocomplete-responsive {
+  width: 100%; /* ขนาดเต็มที่สามารถปรับตามขนาดของ parent container */
+  max-width: 600px;
+}
+
+/* การจัดการความกว้างสำหรับหน้าจอที่เล็กกว่า */
+@media (max-width: 600px) {
+  .autocomplete-responsive {
+    width: 100%; /* ให้เต็มความกว้างของ container */
+    max-width: none; /* ยกเลิกขนาดสูงสุด */
   }
+}
+
+mark {
+  background-color: yellow !important;
+  font-weight: bold;
+}
+
+.skeleton-container {
+  display: flex;
+  flex-direction: column;
+}
+.gray-img{
+  filter: invert(59%) sepia(5%) saturate(261%) hue-rotate(193deg) brightness(85%) contrast(90%);
+
+}

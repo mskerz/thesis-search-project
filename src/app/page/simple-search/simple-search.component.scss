@@ -1,35 +1,97 @@
 .hero {
-    background-color: rgb(163, 163, 163);/* เปลี่ยนเป็น URL ของรูปภาพที่คุณต้องการให้เป็นพื้นหลัง */
-    background-size: cover;
-    background-position: center;
-    color: white;
-    text-align: center;
-    padding: 30px ; /* ปรับขนาดพื้นที่ของ Hero ตามความเหมาะสม */
-  }
-  
-  .hero h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-  }
-  
-  .hero p {
-    font-size: 1.5rem;
-    margin-bottom: 30px;
-  }
-  .custom-select {
-    /* กำหนด border, background, font, padding, etc. */
-    border: 1px solid #ccc;
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-  }
+  background-color: rgb(
+    163,
+    163,
+    163
+  ); /* เปลี่ยนเป็น URL ของรูปภาพที่คุณต้องการให้เป็นพื้นหลัง */
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  padding: 30px; /* ปรับขนาดพื้นที่ของ Hero ตามความเหมาะสม */
+}
 
-  .btn-secondary{
-    background-color: #707070 !important;
-  }
- 
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
 
- 
-  
-  //
- 
+.hero p {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+}
+.custom-select {
+  /* กำหนด border, background, font, padding, etc. */
+  border: 1px solid #ccc;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.btn-secondary {
+  background-color: #707070 !important;
+}
+/* ปรับความกว้างของ p-autoComplete */
+/* ซ่อน scrollbar ของ dropdown */
+.p-autocomplete-panel {
+  overflow: hidden !important; /* ซ่อน scrollbar */
+}
+
+.autocomplete-responsive {
+  width: 100%; /* ขนาดเต็มที่สามารถปรับตามขนาดของ parent container */
+  max-width: 350px;
+}
+.dropdown-responsive {
+  margin-top: auto;
+}
+
+/* การจัดการความกว้างสำหรับหน้าจอที่เล็กกว่า */
+@media (max-width: 600px) {
+  .autocomplete-responsive {
+    width: 100%; /* ให้เต็มความกว้างของ container */
+    max-width: none; /* ยกเลิกขนาดสูงสุด */
+    margin-bottom: 4px;
+  }
+  .dropdown-responsive {
+    margin-top: 4px;
+  }
+}
+
+.p-dropdown .p-dropdown-items > ul {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-left: 0 !important;
+}
+
+.dropdown-responsive .p-dropdown {
+  width: 100%; /* ปรับความกว้างของ dropdown ให้เต็มพื้นที่ที่กำหนด */
+  display: inline-block; /* ทำให้ dropdown ไม่เปลี่ยนบรรทัดใหม่ */
+  box-sizing: border-box;
+
+}
+
+.dropdown-responsive .p-dropdown-items {
+  max-width: 100%; /* ทำให้รายการ dropdown ยืดหยุ่นตามความกว้างของ p-dropdown */
+}
+
+.dropdown-responsive .p-dropdown-item {
+  white-space: nowrap; /* หลีกเลี่ยงการตัดคำ */
+  overflow: hidden; /* ซ่อนข้อความที่ยาวเกินไป */
+  text-overflow: ellipsis; /* แสดง ... แทนข้อความที่ถูกตัด */
+}
+
+
+.container {
+  width: 100%; /* หรือความกว้างที่ต้องการ */
+  box-sizing: border-box; /* รวม padding และ border ในความกว้าง */
+}
+
+.skeleton-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.gray-img {
+  filter: invert(59%) sepia(5%) saturate(261%) hue-rotate(193deg) brightness(85%) contrast(90%);
+
+}

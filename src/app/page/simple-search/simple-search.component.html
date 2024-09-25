@@ -1,44 +1,103 @@
 <div class="hero">
-    <h1>Simple Search</h1>
-    <p>ค้นหาอย่างง่าย</p>
-    <!-- <a routerLink="/account/student/import-thesis">นำเข้า</a> -->
-  </div>
-  
-<div class="container mt-3 d-flex justify-content-center">
-    <div class="col-7 ">
-        <div class="input-group mb-3 ">
-            <input type="text" class="form-control" [(ngModel)]="query" placeholder="ระบุคำค้นหา" />
-            <select class="ms-2 form-select  " id="selectOption" [(ngModel)]="field"   >
-                <option value="" disabled>ค้นหาจาก</option>
-                <option value="title_th">หัวข้อปริญญานิพนธ์ (ภาษาไทย)</option>
-                <option value="author_name">ชื่อผู้เขียน</option>
-                <option value="advisor_name">อาจารย์ที่ปรึกษา</option>
-                <option value="year">ปีการศึกษา</option>
-            </select>
-
-        
-        </div>
-        <button class="btn btn-secondary" (click)="onSimpleSearch()"><i class="bi bi-search fs-6" style="color: #46E57D;"></i> ค้นหา</button>
-        <div class="mt-1" *ngIf="thesisLength!=0">
-            <p class="text-black-50 fs-6"  >ผลการค้นหา {{thesisLength}} รายการ</p>
-        </div>
-        <div class="mt-2">
-            <div *ngFor="let item of thesisList | paginate: { itemsPerPage: 5, currentPage: page }">
-              <div class="container border p-4 mt-1 bg">
-                <a (click)="openLinkInNewTab('/decription/thesis/' + item.doc_id)" target="_blank" style="cursor: pointer;">
-                  <p class="fw-bold">{{item.title_th}}</p>
-                </a>
-                <p>เจ้าของผลงาน : {{item.author_name}}</p>
-                <p>{{item.year}}</p>
-              </div>
-            </div>
-            <div class="d-flex justify-content-center mt-3" *ngIf="thesisLength!=0">
-                <pagination-controls (pageChange)="page = $event"></pagination-controls>
-            </div>        
-        </div>
-          
-          
-    </div>
-    
+  <h1>Simple Search</h1>
+  <p>ค้นหาอย่างง่าย</p>
 </div>
-         
+
+<div class="container mt-3 d-flex justify-content-center gap-2">
+  <div class="col-5 justify-content-center align-items-center">
+    <!-- Search Input and Autocomplete List -->
+    <div class="input-group mb-3">
+      <p-autoComplete
+        [(ngModel)]="query"
+        [suggestions]="filteredQueries"
+        (completeMethod)="filterQueries($event)"
+        placeholder="ระบุคำค้นหา"
+        [style]="{ width: '100%', minWidth: '100%' }"
+        [inputStyle]="{ width: '100%' }"
+        class="autocomplete-responsive"
+      />
+
+      <!-- Search Field Selector -->
+      <!-- <select class="ms-2 form-select" id="selectOption" [(ngModel)]="field">
+        <option value="" disabled>ค้นหาจาก</option>
+        <option value="title_th">หัวข้อปริญญานิพนธ์ (ภาษาไทย)</option>
+        <option value="title_en">หัวข้อปริญญานิพนธ์ (ภาษาอังกฤษ)</option>
+        <option value="author_name">ชื่อผู้เขียน</option>
+        <option value="advisor_name">อาจารย์ที่ปรึกษา</option>
+        <option value="year">ปีการศึกษา</option>
+      </select> -->
+      <p-dropdown
+        [options]="fields"
+        [(ngModel)]="field"
+        placeholder="Select a field"
+        [style]="{ width: '100%', minWidth: '100px' }"
+        [appendTo]="'body'"
+        class="dropdown-responsive ms-1"
+      />
+    </div>
+    <button class="btn btn-secondary rounded-1" (click)="onSimpleSearch()">
+      <i class="bi bi-search fs-6" style="color: #46e57d"></i> ค้นหา
+    </button>
+    <!-- Search Button -->
+
+    <!-- Loader -->
+
+    <!-- Search Results Count -->
+    <div class="mt-1" *ngIf="thesisLength !== 0 && !isLoading">
+      <p class="text-black-50 fs-6">ผลการค้นหา {{ thesisLength }} รายการ</p>
+    </div>
+
+    <!-- Loader Skeleton -->
+
+    <!-- Search Results Display -->
+    <div class="mt-2">
+      <!-- Skeleton Loader -->
+      <div class="skeleton-container mt-2" *ngIf="isLoading">
+        <div *ngFor="let _ of [].constructor(2)" class="flex border p-4 mt-2">
+          <p-skeleton styleClass="mb-2"></p-skeleton>
+          <p-skeleton styleClass="mb-2"></p-skeleton>
+          <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
+        </div>
+      </div>
+
+      <div *ngIf="!isLoading && thesisLength === 0">
+        <div
+          class="d-flex flex-column justify-content-center align-items-center"
+        >
+          <img
+            src="./../../../assets/image/document_vector.svg"
+            class="img-fluid gray-img"
+            alt="Document Vector"
+            width="50%"
+          />
+          <h2 class="text-secondary">ไม่พบเอกสารที่ค้นหา</h2>
+        </div>
+      </div>
+
+      <!-- Search Results Display -->
+      <div *ngIf="!isLoading">
+        <div *ngFor="let item of paginatedThesis">
+          <div class="container border p-4 mt-1 bg">
+            <a
+              (click)="openLinkInNewTab('/decription/thesis/' + item.doc_id)"
+              target="_blank"
+              style="cursor: pointer"
+            >
+              <p class="fw-bold">{{ item.title_th }}</p>
+            </a>
+            <p>เจ้าของผลงาน : {{ item.author_name }}</p>
+            <p>{{ item.year }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination Controls -->
+      <p-paginator
+        [rows]="rowsPerPage"
+        [totalRecords]="thesisLength"
+        (onPageChange)="onPageChange($event)"
+        
+      ></p-paginator>
+    </div>
+  </div>
+</div>

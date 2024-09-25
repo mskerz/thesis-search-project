@@ -37,6 +37,12 @@ import {MatButtonModule} from '@angular/material/button';
 import { ManageStudentComponent } from './page/role/admin/manage-student/manage-student.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { SkeletonModule } from 'primeng/skeleton';
+import { PdfviewerComponent } from './component/dialog/pdfviewer/pdfviewer.component';
+import { SafePipe } from './pipes/safe.pipe';
+import { PaginatorModule } from 'primeng/paginator';
+import { TagModule } from 'primeng/tag';
 
 
 
@@ -68,7 +74,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     ForgotPasswordSendEmailComponent,
     ForgotPasswordSendTokenComponent,
     ForgotPasswordNewPasswordComponent,
-    ManageStudentComponent
+    ManageStudentComponent,
+    PdfviewerComponent,
+    SafePipe,
   ],
   imports: [
     BrowserModule,
@@ -76,7 +84,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     HttpClientModule,
     BrowserAnimationsModule,
     DropdownModule,FormsModule,InputTextModule,InputTextModule,ButtonModule,MatMenuModule,MatCardModule,
-    ReactiveFormsModule,MatIconModule,MatTableModule,MatButtonModule,NgxPaginationModule,MatDialogModule
+    ReactiveFormsModule,MatIconModule,MatTableModule,MatButtonModule,NgxPaginationModule,MatDialogModule,AutoCompleteModule,
+    SkeletonModule,PaginatorModule,TagModule
+    
     
   ],
   providers: [

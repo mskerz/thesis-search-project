@@ -13,30 +13,12 @@ export const AuthGuard: CanActivateFn = (route, state) => {
     take(1),
     map((isLoggedIn: boolean) => {
 
-            // Define the restricted URL
-            if ( state.url.includes('/reset-password') ) {
-              if(isLoggedIn){
-              // Show loading spinner while redirecting
-              Swal.fire({
-                title: 'Already Logged In',
-                text: 'Redirecting...',
-                timer:3000,
-                didOpen: () => {
-                  Swal.showLoading();
-                }
-              }).then(() => {
-                router.navigate(['/simple-search']); // Navigate after Swal is closed
-              });
-               // Adjust timeout as needed
-              return false;
-              }
-              return true;
-            }
       if (!isLoggedIn) {
-        router.navigate(['/login']); // Navigate after Swal is closed
+        router.navigate(['/login']);
         return false;
       }
       return true;
+
     })
   );
 };
