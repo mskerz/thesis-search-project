@@ -70,12 +70,12 @@
             alt="Document Vector"
             width="50%"
           />
-          <h2 class="text-secondary">ไม่พบเอกสารที่ค้นหา</h2>
+          <h2 class="text-secondary">{{ isSearched ? 'ไม่พบเอกสารที่ค้นหา' : 'โปรดค้นหาเอกสาร' }}</h2>
         </div>
       </div>
 
       <!-- Search Results Display -->
-      <div *ngIf="!isLoading">
+      <div *ngIf="!isLoading && isSearched">
         <div *ngFor="let item of paginatedThesis">
           <div class="container border p-4 mt-1 bg">
             <a

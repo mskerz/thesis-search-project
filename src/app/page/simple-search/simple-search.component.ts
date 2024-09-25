@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ThesisList, ThesisListConvert } from 'src/app/models/thesisList.model';
 import { SearchService } from 'src/app/services/search.service';
 import { CacheService } from 'src/app/services/Cache.service';
@@ -21,7 +21,7 @@ export class SimpleSearchComponent implements OnInit {
   suggestionsVisible: boolean = false; // Add this to control visibility
   isLoading: boolean = false; // Add this to control loader visibility
   querys: string[] = [];
-
+  isSearched = false; // Add this to control
   rowsPerPage =6;
   paginatedThesis = new Array<ThesisList>();
 
@@ -35,17 +35,39 @@ export class SimpleSearchComponent implements OnInit {
   constructor(
     private search: SearchService,
     private router: Router,
-    private cacheService: CacheService
+    private cacheService: CacheService,
+    private route: ActivatedRoute // ใช้สำหรับดึง query params
+
   ) {}
 
   ngOnInit() {
     this.autocompleteQueries = this.cacheService.getQueryResults();
-     
+    
+    this.route.queryParams.subscribe(params=>{
+      this.field = params['field'] || ''; // ใช้ค่าจาก URL หรือค่าว่าง
+      this.query = params['query'] || ''; // ใช้ค่าจาก URL หรือค่าว่าง
+      if (this.field && this.query) {
+        this.onSimpleSearch(); // ทำการค้นหาทันทีถ้ามีค่าใน field และ query
+        
+      }else {
+        this.isSearched = false; // ถ้าไม่มีค่าให้เป็น false
+        this.thesisList = []; // รีเซ็ตผลลัพธ์
+        this.thesisLength = 0; // รีเซ็ตความยาวของผลลัพธ์
+        console.log(this.thesisList);
+
+      }
+    })
   }
 
   onSimpleSearch() {
+    this.isSearched = true
     if (this.field && this.query) {
       this.isLoading = true;
+
+      
+          // สร้าง URL ใหม่
+      this.router.navigate(['/simple-search'], { queryParams: { field: this.field, query: this.query } });
+
       setTimeout(() => {
         this.search
           .SimpleSearch(this.field, this.query)
@@ -61,7 +83,7 @@ export class SimpleSearchComponent implements OnInit {
                 
                 // อัปเดตการแบ่งหน้า
                 this.updatePagination();
-                console.log(this.thesisList);
+                // console.log(this.thesisList);
 
                 // Save the query for autocomplete
                 this.cacheService.saveQuery(this.query);
@@ -77,11 +99,11 @@ export class SimpleSearchComponent implements OnInit {
             } else {
               this.thesisLength = 0;
               this.thesisList = [];
-              Swal.fire({
-                icon: 'warning',
-                text: 'ไม่พบปริญญานิพนธ์ที่คุณค้นหา',
-                confirmButtonColor: '#34c968',
-              });
+              // Swal.fire({
+              //   icon: 'warning',
+              //   text: 'ไม่พบปริญญานิพนธ์ที่คุณค้นหา',
+              //   confirmButtonColor: '#34c968',
+              // });
             }
           });
       }, 2000); // Delay of 2 seconds
@@ -106,14 +128,6 @@ export class SimpleSearchComponent implements OnInit {
     window.open(fullUrl, '_blank');
   }
 
-  highlight(text: string): string {
-    let highlightedText = text;
-    this.querys.forEach((term) => {
-      const regex = new RegExp(`(${term})`, 'gi');
-      highlightedText = highlightedText.replace(regex, '<mark>$1</mark>');
-    });
-    return highlightedText;
-  }
 
 
   onPageChange(event: any): void {
