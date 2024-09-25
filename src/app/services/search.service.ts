@@ -13,8 +13,8 @@ export class SearchService {
   constructor(private http:HttpClient,private cookie:CookieService,private auth:AuthService) { }
 
 
-  SimpleSearch(field:string,query:string): Observable<ThesisList[]>{
-    return this.http.get<ThesisList[]>(`${this.auth.getEndpoint()}/simple-search/${field}/${query}`)
+  SimpleSearch(field:string,query:string): Observable<any>{
+    return this.http.get<any>(`${this.auth.getEndpoint()}/simple-search/${field}/${query}`)
   }
 
   AdvancedSearch(query: string){

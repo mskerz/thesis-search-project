@@ -49,15 +49,16 @@ export class SimpleSearchComponent implements OnInit {
       setTimeout(() => {
         this.search
           .SimpleSearch(this.field, this.query)
-          .subscribe((data: any) => {
+          .subscribe((data) => {
             this.isLoading = false; // Hide loader
 
-            if (data && data.results) {
+            if (data.results) {
               try {
                 this.thesisList = ThesisListConvert.fromJson_toThesis(
                   JSON.stringify(data.results)
                 );
                 this.thesisLength = this.thesisList.length;
+                
                 // อัปเดตการแบ่งหน้า
                 this.updatePagination();
                 console.log(this.thesisList);
@@ -87,7 +88,7 @@ export class SimpleSearchComponent implements OnInit {
     } else {
       Swal.fire({
         icon: 'warning',
-        text: 'คุณกรอกข้อมูลไม่ครบ!',
+        text: 'คุณยังไม่ระบุคำค้นหา หรือ ประเภทข้อมูล!',
         confirmButtonColor: '#34c968',
       });
     }
