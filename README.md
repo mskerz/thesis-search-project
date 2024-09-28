@@ -1,6 +1,41 @@
-# ThesisSearch
+# Thesis Search System
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
+This Senior project is a theses search system for Computer Science students. It provides functionalities like document indexing, TF-IDF-based search, and user account management. 
+
+## System Scope
+
+### 1. Searching
+- **Simple Search**: String Matching.
+- **Advanced Search**: TF-IDF (Term Frequency-Inverse Document Frequency) based search.
+
+### 2. Indexing
+- **Parsing**: Extracts text from document files.
+- **Tokenization**: Splits text into tokens (words/phrases).
+- **Stop Word Removal**: Removes unnecessary words and whitespace.
+
+### 3. Scoring
+- **Term Frequency (TF)**: Measures word frequency within a document.
+- **Inverse Document Frequency (IDF)**: Measures word importance across all documents.
+- **TF-IDF**: Calculates word importance for search.
+
+### 4. Ranking
+Results are ranked based on their TF-IDF scores to provide the most relevant results to the user.
+
+### 5. User Account Management
+- Sign-up
+- Log-in/Log-out
+- Edit Profile
+- Change Password
+- Reset Password
+
+## Tech Stack - Frontend
+[![Frontend](https://skillicons.dev/icons?i=angular,primeng)](https://github.com/mskerz/thesis-search-project)
+
+
+## Installation 
+
+Coming Soon...
+
 
 ## Development server
 
