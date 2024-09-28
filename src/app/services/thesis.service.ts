@@ -14,5 +14,9 @@ export class ThesisService {
   getThesess():Observable<ThesisUploadList[]>{
     return this.http.get<ThesisUploadList[]>(`${this.auth.getEndpoint()}/record/thesess-upload`);
   }
+
+  Recheck(doc_id: number, newStatus: number){
+    return this.http.put<any>(`${this.auth.getEndpoint()}/recheck-thesis/${doc_id}/?status=${newStatus}`,{});
+}
   
 }

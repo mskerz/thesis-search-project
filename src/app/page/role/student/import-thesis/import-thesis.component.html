@@ -1,4 +1,4 @@
-<div class="container" style="margin-top: 102px" *ngIf="hasThesis">
+<!-- <div class="container" style="margin-top: 102px" *ngIf="hasThesis">
   <div class="border-import col-5 mx-auto">
     <p class="text-center fs-5">ข้อมูลปริญญานิพนธ์</p>
     <form (ngSubmit)="onSubmit()"   >
@@ -34,11 +34,11 @@
       </button>
     </form>
   </div>
-</div>
+</div> -->
 
 
 
-<div class="container" style="margin-top: 102px" *ngIf="!hasThesis">
+<div class="container" style="margin-top: 102px"  >
   <div class="border-import col-5 mx-auto">
     <p class="text-center fs-5">ข้อมูลปริญญานิพนธ์</p>
     <form (ngSubmit)="onSubmit()"   >
@@ -75,6 +75,11 @@
       <button   class="btn btn-success d-block mx-auto mt-3 fs-5" type="submit"  >
         นำเข้าข้อมูล
       </button>
+
+      <!-- Progress Bar -->
+      <div *ngIf="isLoading" class="progress mt-3">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%;background-color: #2FAA5A;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
     </form>
   </div>
 </div>

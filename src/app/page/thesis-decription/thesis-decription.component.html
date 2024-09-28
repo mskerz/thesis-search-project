@@ -38,7 +38,7 @@
             <th scope="row" class="fw-bold" ><i class="bi bi-file-earmark-pdf" ></i> ไฟล์</th>
             
 
-            <td style="max-width: 50%;"><button class="btn" (click)="Download_PDF(this.SelectedThesis?.doc_id)"><i class="bi bi-download"></i> Download</button></td> <!-- เพิ่ม max-width เพื่อกำหนดความกว้างสูงสุด -->
+            <td style="max-width: 50%;"><button class="btn" (click)="Download_PDF(this.SelectedThesis?.author_name!,this.SelectedThesis?.doc_id)"><i class="bi bi-download"></i> Download</button></td> <!-- เพิ่ม max-width เพื่อกำหนดความกว้างสูงสุด -->
           </tr>
           <tr *ngIf="!(loggedIn|async)">
             <th scope="row" class="fw-bold" ></th>

@@ -43,6 +43,7 @@ import { PdfviewerComponent } from './component/dialog/pdfviewer/pdfviewer.compo
 import { SafePipe } from './pipes/safe.pipe';
 import { PaginatorModule } from 'primeng/paginator';
 import { TagModule } from 'primeng/tag';
+import { ProgressSpinnerModule as Spinner } from 'primeng/progressspinner';
 
 
 
@@ -85,7 +86,7 @@ import { TagModule } from 'primeng/tag';
     BrowserAnimationsModule,
     DropdownModule,FormsModule,InputTextModule,InputTextModule,ButtonModule,MatMenuModule,MatCardModule,
     ReactiveFormsModule,MatIconModule,MatTableModule,MatButtonModule,NgxPaginationModule,MatDialogModule,AutoCompleteModule,
-    SkeletonModule,PaginatorModule,TagModule
+    SkeletonModule,PaginatorModule,TagModule,Spinner
     
     
   ],

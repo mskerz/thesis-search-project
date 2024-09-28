@@ -55,8 +55,11 @@
               <i class="bi bi-asterisk"></i> เปลี่ยนสิทธิ์การใช้งานผู้ใช้
             </button>
             <button mat-menu-item *ngIf="userRole == 0" routerLink="/account/student/import-thesis">
-              <i class="bi bi-upload"></i> {{ hasThesis ? 'แก้ไขปริญญานิพนธ์' : 'อัพโหลดปริญญานิพนธ์' }}
+              <i class="bi bi-upload"></i> อัพโหลดปริญญานิพนธ์
             </button>
+            <!-- <button mat-menu-item *ngIf="userRole == 0" routerLink="/account/student/import-thesis">
+              <i class="bi bi-upload"></i> {{ hasThesis ? 'แก้ไขปริญญานิพนธ์' : 'อัพโหลดปริญญานิพนธ์' }}
+            </button> -->
             <button mat-menu-item (click)="logout()">
               <i class="bi bi-box-arrow-right"></i> Logout
             </button>

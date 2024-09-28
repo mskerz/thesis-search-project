@@ -36,12 +36,18 @@ export class ThesisDecriptionComponent implements OnInit {
 
 
 
- Download_PDF(doc_id:number| undefined){
+ Download_PDF(author_name:string,doc_id:number| undefined){
   this.downloadService.downloadPDF(doc_id!).subscribe(
     (data: Blob) => {
       const blob = new Blob([data], { type: 'application/pdf' });
       const url = window.URL.createObjectURL(blob);
-      window.open(url);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Thesis_${author_name}_สำเนา.pdf`;  // กำหนดชื่อไฟล์ที่นี่
+      a.click();
+
+      // ปิด URL object เมื่อไม่ใช้แล้ว
+      window.URL.revokeObjectURL(url);
     },
     error => {
       console.error('Error downloading PDF:', error);
@@ -49,4 +55,8 @@ export class ThesisDecriptionComponent implements OnInit {
     }
   );
  }
+
+
+ 
+
 }

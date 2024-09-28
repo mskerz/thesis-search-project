@@ -26,6 +26,7 @@ export class ImportThesisComponent implements OnInit {
     year: 2566,
     file: null,
   };
+  isLoading = false; // ตัวแปรสำหรับจัดการสถานะการโหลด
 
 
   constructor(
@@ -40,7 +41,7 @@ export class ImportThesisComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.checkThesisStatus();
+    // this.checkThesisStatus();
 
     
 
@@ -78,7 +79,8 @@ export class ImportThesisComponent implements OnInit {
     formData.append('advisor_id', this.form_import.advisor_id.toString());
     formData.append('year', this.form_import.year.toString());
     formData.append('file', this.form_import.file);
-
+    this.isLoading = true; // ตั้งค่าการโหลดเป็น true
+    console.time('importThesis'); // เริ่มจับเวลา
     this.stdService.importThesis(formData).subscribe(
       (response) => {
         Swal.fire({
@@ -93,6 +95,10 @@ export class ImportThesisComponent implements OnInit {
           title: 'ล้มเหลว',
           text: 'ไม่สามารถนำเข้าข้อมูลวิทยานิพนธ์ได้',
         });
+      },
+      () => {
+        this.isLoading = false; // ตั้งค่าการโหลดเป็น false หลังการทำงานเสร็จสิ้น
+        console.timeEnd('importThesis')
       }
     );
   }
@@ -102,7 +108,7 @@ export class ImportThesisComponent implements OnInit {
       this.hasThesis = data.has_thesis;
       this.self_thesis = ThesisCheckConvert.fromJson_toThesis(JSON.stringify(data.thesis))
       if (this.hasThesis) {
-        this.titleService.setTitle("แก้ไขปริญญานิพนะ์")
+        this.titleService.setTitle("แก้ไขปริญญานิพนธ์")
         console.log('อัพโหลดแล้ว');
         // นำทางไปหน้าแก้ไข
       } else {
