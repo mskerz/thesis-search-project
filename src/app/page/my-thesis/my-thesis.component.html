@@ -1,0 +1,31 @@
+<div class="container mt-4">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-6">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-body">
+            <h4 class="card-title font-weight-bold">{{ my_thesis!.title_th }}</h4>
+            <h4 class="card-subtitle text-muted">{{ my_thesis!.title_en }}</h4>
+            <p class="card-text">
+              <strong>อาจารย์ที่ปรึกษา:</strong> {{ my_thesis!.advisor_name }} <br>
+              <strong>ปีการศึกษา:</strong> {{ my_thesis!.year }} <br>
+              <strong>สถานะเอกสาร:</strong>
+              <span [ngClass]="{
+                'text-success': my_thesis!.recheck_status === 1,
+                'text-warning': my_thesis!.recheck_status === 0,
+                'text-danger': my_thesis!.recheck_status === 2
+              }">
+                {{ getStatusText(my_thesis!.recheck_status) }}
+              </span>
+            </p>
+            <p class="card-text text-justify">
+              <em>{{ my_thesis.abstract }}</em>
+            </p>
+            <div class="text-center">
+              <a *ngIf="hasDeleted" routerLink="/account/student/import-thesis" class="btn btn-danger">File Rejected - Upload Again</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

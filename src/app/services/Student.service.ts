@@ -56,7 +56,7 @@ export class StudentService {
     this.auth.getUserRole().subscribe(role=>{
       if (role === 0) {  // ตรวจสอบว่า role เท่ากับ 0 หรือไม่
         this.checkThesis().subscribe(data => {
-          this.hasThesisStatus.next(data.has_thesis);
+          this.hasThesisStatus.next(data.has_deleted);
         });
       } 
     })

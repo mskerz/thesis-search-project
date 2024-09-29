@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { Title } from '@angular/platform-browser';
 import { AuthService } from 'src/app/services/auth.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-import-thesis',
@@ -16,9 +17,8 @@ import { Observable } from 'rxjs';
 export class ImportThesisComponent implements OnInit {
   Advisors = Array<Advisor>();
   hasThesis = false;
-  loggedIn: Observable<boolean>;
   userRole: number | null = null;
-  self_thesis? :ThesisResponse;
+  hasDeletedThesis = false;
   form_import = {
     title_th: '',
     title_en: '',
@@ -32,20 +32,19 @@ export class ImportThesisComponent implements OnInit {
   constructor(
     private advisor: AdvisorService,
     private stdService: StudentService,
-    private titleService: Title,
-    private auth:AuthService
+    private route:Router
   ) {
-    this.loggedIn = this.auth.isLoggedIn();
 
   }
 
   ngOnInit(): void {
+    this.stdService.thesisStatus$.subscribe(status=>{
+      this.hasDeletedThesis = status
+    }) 
+    if(!this.hasDeletedThesis){
+      this.route.navigate(['/account/student/thesis'])
+    }
     
-    // this.checkThesisStatus();
-
-    
-
-
     this.advisor.fetchAdvisorAll().subscribe(
       (data) => {
         this.Advisors = data;
@@ -80,7 +79,6 @@ export class ImportThesisComponent implements OnInit {
     formData.append('year', this.form_import.year.toString());
     formData.append('file', this.form_import.file);
     this.isLoading = true; // ตั้งค่าการโหลดเป็น true
-    console.time('importThesis'); // เริ่มจับเวลา
     this.stdService.importThesis(formData).subscribe(
       (response) => {
         Swal.fire({
@@ -95,28 +93,16 @@ export class ImportThesisComponent implements OnInit {
           title: 'ล้มเหลว',
           text: 'ไม่สามารถนำเข้าข้อมูลวิทยานิพนธ์ได้',
         });
+        this.isLoading = false; // ตั้งค่าการโหลดเป็น false หลังการทำงานเสร็จสิ้น
+
       },
       () => {
         this.isLoading = false; // ตั้งค่าการโหลดเป็น false หลังการทำงานเสร็จสิ้น
-        console.timeEnd('importThesis')
       }
     );
   }
 
-  checkThesisStatus() {
-    this.stdService.checkThesis().subscribe((data) => {
-      this.hasThesis = data.has_thesis;
-      this.self_thesis = ThesisCheckConvert.fromJson_toThesis(JSON.stringify(data.thesis))
-      if (this.hasThesis) {
-        this.titleService.setTitle("แก้ไขปริญญานิพนธ์")
-        console.log('อัพโหลดแล้ว');
-        // นำทางไปหน้าแก้ไข
-      } else {
-        console.log('ยังไม่ได้นำเข้า');
-        // นำทางไปหน้านำเข้า
-      }
-    });
-  }
+
 }
 
 // ImportThesis(form_import:any){

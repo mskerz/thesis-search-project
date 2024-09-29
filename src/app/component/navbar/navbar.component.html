@@ -57,6 +57,9 @@
             <button mat-menu-item *ngIf="userRole == 0" routerLink="/account/student/import-thesis">
               <i class="bi bi-upload"></i> อัพโหลดปริญญานิพนธ์
             </button>
+            <button mat-menu-item *ngIf="userRole == 0" routerLink="/account/student/thesis"> 
+              <i class="bi bi-file-earmark-pdf"></i> ปริญญานิพนธ์ของฉัน
+            </button>
             <!-- <button mat-menu-item *ngIf="userRole == 0" routerLink="/account/student/import-thesis">
               <i class="bi bi-upload"></i> {{ hasThesis ? 'แก้ไขปริญญานิพนธ์' : 'อัพโหลดปริญญานิพนธ์' }}
             </button> -->

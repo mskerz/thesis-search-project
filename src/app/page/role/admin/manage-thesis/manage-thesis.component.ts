@@ -83,6 +83,11 @@ export class ManageThesisComponent implements OnInit {
         window.open(url);
       },
       (error) => {
+        Swal.fire({
+          icon:'error',
+          title:'แจ้งเตือนข้อผิดพลาด',
+          text:'ไม่พบไฟล์ที่คุณร้องขอ'
+        })
         console.error('Error downloading PDF:', error);
         // จัดการเมื่อเกิดข้อผิดพลาด
       }
@@ -163,10 +168,10 @@ export class ManageThesisComponent implements OnInit {
   }
 
   Recheck(docId: number, newStatus: number) {
-    this.Loading();
+    // this.Loading();
     this.thesisService.Recheck(docId, newStatus).subscribe(
       (response) => {
-        Swal.close();
+        // Swal.close();
         if (response.status === 200) {
           if (newStatus === 1) {
             Swal.fire({

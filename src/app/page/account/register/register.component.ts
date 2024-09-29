@@ -16,8 +16,18 @@ export class RegisterComponent  {
     firstname: '',
     lastname: '',
   }
+  showHidePassword = false
+  showHideConfirmPassword = false
 
   constructor(private authService: AuthService,private router:Router){}
+
+  toggleHidePassword() {
+    this.showHidePassword = !this.showHidePassword;
+
+  }
+  toggleHideConfirmPassword() {
+    this.showHideConfirmPassword = !this.showHideConfirmPassword;
+  }
 
   onSubmit() {
     if (!this.form_register.email || !this.form_register.password || 

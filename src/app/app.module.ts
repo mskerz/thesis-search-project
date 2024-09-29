@@ -44,7 +44,10 @@ import { SafePipe } from './pipes/safe.pipe';
 import { PaginatorModule } from 'primeng/paginator';
 import { TagModule } from 'primeng/tag';
 import { ProgressSpinnerModule as Spinner } from 'primeng/progressspinner';
-
+import { PasswordModule } from 'primeng/password';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import {DialogModule} from 'primeng/dialog';
+import { MyThesisComponent } from './page/my-thesis/my-thesis.component'
 
 
 
@@ -78,6 +81,7 @@ import { ProgressSpinnerModule as Spinner } from 'primeng/progressspinner';
     ManageStudentComponent,
     PdfviewerComponent,
     SafePipe,
+    MyThesisComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,7 +90,7 @@ import { ProgressSpinnerModule as Spinner } from 'primeng/progressspinner';
     BrowserAnimationsModule,
     DropdownModule,FormsModule,InputTextModule,InputTextModule,ButtonModule,MatMenuModule,MatCardModule,
     ReactiveFormsModule,MatIconModule,MatTableModule,MatButtonModule,NgxPaginationModule,MatDialogModule,AutoCompleteModule,
-    SkeletonModule,PaginatorModule,TagModule,Spinner
+    SkeletonModule,PaginatorModule,TagModule,Spinner,PasswordModule,FloatLabelModule,DialogModule
     
     
   ],

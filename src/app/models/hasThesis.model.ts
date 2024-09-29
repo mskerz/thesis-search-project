@@ -1,12 +1,15 @@
 export interface ThesisResponse {
   title_th: string;
   title_en: string;
-  advisor_id: number;
+  author_name: string;
+  advisor_name: number;
+  recheck_status: number;
   year: number;
+  abstract:string;
 }
 
 export interface ThesisCheckResponse {
-  has_thesis: boolean;
+  has_deleted: boolean;
   thesis?: ThesisResponse;
 }
 
