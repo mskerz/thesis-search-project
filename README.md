@@ -1,6 +1,7 @@
 # Thesis Search System
+  This Senior project is a theses search system for Computer Science students. It provides functionalities like document indexing, TF-IDF-based search, and user account management. 
+  **Go to Backend Link [Here!](https://github.com/mskerz/thesis_search_backend).**
 
-This Senior project is a theses search system for Computer Science students. It provides functionalities like document indexing, TF-IDF-based search, and user account management. 
 
 ## System Scope
 
