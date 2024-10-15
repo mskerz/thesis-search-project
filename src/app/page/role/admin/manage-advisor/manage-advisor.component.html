@@ -5,12 +5,12 @@
         <i class="bi bi-person-add"></i> เพิ่ม
       </button>
       <!-- Your existing table code -->
-      <table mat-table [dataSource]="Advisors | paginate: { itemsPerPage:5, currentPage: page }">
+      <table mat-table [dataSource]="paginateAdvisor">
         <!-- Advisor ID Column -->
         <ng-container matColumnDef="advisor_id">
           <th mat-header-cell *matHeaderCellDef> No. </th>
           <td mat-cell *matCellDef="let index = index; let advisor">
-            {{ (page - 1) * 5 + index + 1 }} <!-- Displaying 1-based index -->
+            {{ (page - 1) * rowsPerPage + index + 1 }} <!-- Displaying 1-based index -->
           </td>
         </ng-container>
 
@@ -29,7 +29,7 @@
             <button mat-button (click)="OpenEditAdvisorDialog(advisor.advisor_id)">
               <i class="bi bi-pen"></i> แก้ไข
             </button>
-            <button mat-button (click)="deleteAdvisor(advisor.advisor_id)">
+            <button mat-button (click)="deleteAdvisor(advisor)">
               <i class="bi bi-trash"></i> ลบ
             </button>
           </td>
@@ -40,9 +40,13 @@
       </table>
 
       <!-- Pagination controls -->
-      <div class="d-flex justify-content-center mt-3">
-        <pagination-controls (pageChange)="page = $event" class="my-pagination"></pagination-controls>
-      </div>
+       <!-- Pagination controls -->
+       <p-paginator
+       [rows]="rowsPerPage"
+       [totalRecords]="totalRecords"
+       (onPageChange)="onPageChange($event)"
+       
+     ></p-paginator>
     </mat-card-content>
   </mat-card>
 </div>

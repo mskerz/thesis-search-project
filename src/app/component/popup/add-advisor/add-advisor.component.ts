@@ -22,10 +22,10 @@ export class AddAdvisorComponent {
     if (!this.advisor.advisor_name) {
       Swal.fire({
         icon: 'warning',
-        title: 'Please Fill Advisor Name!'
+        title: 'กรุณากรอกข้อมูลอาจารย์ที่ปรึกษา'
       });
       return;
-    }
+    } 
 
 
     // Call AdvisorService to insert advisor

@@ -5,6 +5,7 @@ import { Thesis, ThesisConvert } from 'src/app/models/thesis.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { DownloadService } from 'src/app/services/download.service';
 import { SearchService } from 'src/app/services/search.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-thesis-decription',
   templateUrl: './thesis-decription.component.html',
@@ -50,8 +51,12 @@ export class ThesisDecriptionComponent implements OnInit {
       window.URL.revokeObjectURL(url);
     },
     error => {
-      console.error('Error downloading PDF:', error);
-      // จัดการเมื่อเกิดข้อผิดพลาด
+       // จัดการเมื่อเกิดข้อผิดพลาด
+       Swal.fire({
+        icon:'error',
+        title:'ขออภัย',
+        text: 'ไม่สามารถดาวน์โหลดได้ เนื่องจากไฟล์นี้อาจถูกลบไปแล้ว',
+      })
     }
   );
  }

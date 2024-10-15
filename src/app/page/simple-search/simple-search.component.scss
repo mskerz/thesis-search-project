@@ -95,3 +95,15 @@
   filter: invert(59%) sepia(5%) saturate(261%) hue-rotate(193deg) brightness(85%) contrast(90%);
 
 }
+
+
+#thesis-selector{
+  margin: auto;
+  background-color: inherit;
+  transition: background-color 0.3s ease; /* กำหนดเวลาและรูปแบบของ transition */
+
+}
+
+#thesis-selector:hover{
+  background-color: #f8f8f8;
+}

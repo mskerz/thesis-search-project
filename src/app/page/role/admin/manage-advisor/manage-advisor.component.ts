@@ -1,5 +1,6 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTable } from '@angular/material/table';
 import { AddAdvisorComponent } from 'src/app/component/popup/add-advisor/add-advisor.component';
 import { EditAdvisorComponent } from 'src/app/component/popup/edit-advisor/edit-advisor.component';
 import { Advisor } from 'src/app/models/advisor.model';
@@ -12,9 +13,13 @@ import Swal from 'sweetalert2';
   styleUrls: ['./manage-advisor.component.scss']
 })
 export class ManageAdvisorComponent implements OnInit {
+  @ViewChild(MatTable) table!: MatTable<Advisor>; // ใช้ ViewChild
   Advisors= Array<Advisor>();
   displayedColumns: string[] = ['advisor_id', 'advisor_name', 'actions'];
   page =1;
+  rowsPerPage = 6;
+  totalRecords = 0;
+  paginateAdvisor = Array<Advisor>();
   constructor(private advisorService:AdvisorService,private dialog: MatDialog,private cdr: ChangeDetectorRef){
 
   }
@@ -24,7 +29,9 @@ export class ManageAdvisorComponent implements OnInit {
   fetchAdvisors(){
     this.advisorService.fetchAdvisorAll().subscribe((data)=>{
         this.Advisors = data;
-        this.cdr.detectChanges();
+        this.totalRecords = data.length
+        this.updatePagination()
+        
     },err=>{
       console.error('Failed to fetch advisors:', err);
 
@@ -42,6 +49,7 @@ export class ManageAdvisorComponent implements OnInit {
       if (result) {
         // Handle result if needed
         console.log('Dialog closed with result:', result);
+        this.cdr.detectChanges();
         this.fetchAdvisors();// Detect changes after dialog closes
       }
     });
@@ -59,33 +67,36 @@ export class ManageAdvisorComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         // Handle result if needed
-        console.log('Dialog closed with result:', result);
+        this.cdr.detectChanges();
         this.fetchAdvisors();// Detect changes after dialog closes
+        this.table.renderRows(); // ทำให้ตาราง re-render
       }
     });
 
     
   }
 
-  deleteAdvisor(advisor_id: number): void {
+  deleteAdvisor(advisor:any): void {
     Swal.fire({
-      title: 'Are you sure?',
-      text: 'You will not be able to recover this advisor!',
+      title: `ยืนยันการลบข้อมูลอาจารย์ที่ปรึกษา `,
+      // text:advisor.advisor_name,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
+      confirmButtonColor: '#27B758',
+      cancelButtonColor: 'gray',
+      cancelButtonText:"ยกเลิก",
+      confirmButtonText: 'ตกลง',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.advisorService.deleteAdvisor(advisor_id).subscribe(
+        this.advisorService.deleteAdvisor(advisor.advisor_id).subscribe(
           () => {
             Swal.fire({
               icon: 'success',
-              title: 'Advisor Deleted!',
+              title: 'ลบข้อมูลอาจารย์ที่ปรึกษาสำเร็จ !',
             });
-            this.fetchAdvisors();
-            // Optionally, update UI or perform additional actions
+            this.cdr.detectChanges();
+            this.table.renderRows();
+                // Optionally, update UI or perform additional actions
           },
           (error) => {
             console.error('Failed to delete advisor:', error);
@@ -94,6 +105,16 @@ export class ManageAdvisorComponent implements OnInit {
         );
       }
     });
+  }
+
+  onPageChange(event: any): void {
+    this.page = event.page + 1; // PrimeNG paginator starts from 0
+    this.updatePagination();
+  }
+  updatePagination(): void {
+    const startIndex = (this.page - 1) * this.rowsPerPage;
+    const endIndex = startIndex + this.rowsPerPage;
+    this.paginateAdvisor = this.Advisors.slice(startIndex, endIndex);
   }
   
 }

@@ -76,6 +76,16 @@
           </td>
         </ng-container>
 
+        <ng-container matColumnDef="manage_thesis">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let document">
+            
+            <button (click)="OpenThesisEditDialog(document.doc_id)" class="btn btn-outline-warning" ><i class="bi bi-pen"></i></button>
+            <button (click)="deleteThesis(document.doc_id)" class="btn btn-outline-danger" ><i class="bi bi-trash-fill"></i></button>
+
+          </td>
+        </ng-container>
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>

@@ -12,6 +12,12 @@ export class StudentService {
   private hasThesisStatus = new BehaviorSubject<boolean>(false);
   thesisStatus$ = this.hasThesisStatus.asObservable();
 
+  private hasDeleteThesis = new BehaviorSubject<boolean>(false);
+  thesishasDelete$ = this.hasDeleteThesis.asObservable();
+
+  private hasThesisReject = new BehaviorSubject<boolean>(false);
+  thesishasReject$ = this.hasThesisReject.asObservable();
+
   constructor(private http:HttpClient,private auth:AuthService) { }
    
   getStudent(): Observable<Student[]> {
@@ -33,7 +39,7 @@ export class StudentService {
         switchMap(role => {
           if (role === 1) {
             // Send PUT request to change the student's role to admin
-            return this.http.put(`${this.auth.getEndpoint()}/change_role_student/${userId}`, {});
+            return this.http.put(`${this.auth.getEndpoint()}/user/change-permission/${userId}`, {});
           } else {
             // If the user is not an admin, return an error or empty Observable
             return of({ message: 'Permission denied', status_code: 403 });
@@ -45,18 +51,41 @@ export class StudentService {
 
 
   importThesis(formData: FormData): Observable<any> {
-    return this.http.post(`${this.auth.getEndpoint()}/student/import-thesis`, formData);
+    return this.http.post(`${this.auth.getEndpoint()}/user/import-thesis`, formData);
   }
 
   checkThesis(): Observable<ThesisCheckResponse> {
     return this.http.get<ThesisCheckResponse>(`${this.auth.getEndpoint()}/check-thesis`);
   }
 
-  updateThesisStatus() {
+  hasThesis() {
     this.auth.getUserRole().subscribe(role=>{
       if (role === 0) {  // ตรวจสอบว่า role เท่ากับ 0 หรือไม่
         this.checkThesis().subscribe(data => {
-          this.hasThesisStatus.next(data.has_deleted);
+          this.hasThesisStatus.next(data.has_thesis);
+        });
+      } 
+    })
+    
+  }
+
+
+  ThesisHasReject(){
+    this.auth.getUserRole().subscribe(role=>{
+      if (role === 0) {  // ตรวจสอบว่า role เท่ากับ 0 หรือไม่
+        this.checkThesis().subscribe(data => {
+          this.hasThesisReject.next(data.has_rejected);
+        });
+      } 
+    })
+  }
+
+
+  ThesisHasDeleted() {
+    this.auth.getUserRole().subscribe(role=>{
+      if (role === 0) {  // ตรวจสอบว่า role เท่ากับ 0 หรือไม่
+        this.checkThesis().subscribe(data => {
+          this.hasDeleteThesis.next(data.has_deleted);
         });
       } 
     })

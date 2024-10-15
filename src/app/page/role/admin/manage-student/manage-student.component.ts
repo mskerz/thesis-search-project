@@ -118,8 +118,10 @@ export class ManageStudentComponent implements OnInit  {
       text:"ยืนยันการเปลี่ยนสิทธิ",
       icon: 'warning',
       showCancelButton: true,
+      confirmButtonColor: '#27B758',
+      cancelButtonColor: 'gray',
+      cancelButtonText:"ยกเลิก",
       confirmButtonText: 'ตกลง',
-      cancelButtonText: 'ยกเลิก',
     }).then((result)=>{
       if(result.isConfirmed ){
         this.updateStatus(user_id);

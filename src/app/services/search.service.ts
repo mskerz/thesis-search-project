@@ -14,11 +14,11 @@ export class SearchService {
 
 
   SimpleSearch(field:string,query:string): Observable<any>{
-    return this.http.get<any>(`${this.auth.getEndpoint()}/simple-search/${field}/${query}`)
+    return this.http.get<any>(`${this.auth.getEndpoint()}/search/simple/${field}/${query}`)
   }
 
-  AdvancedSearch(query: string){
-    return this.http.get<ThesisList[]>(`${this.auth.getEndpoint()}/advanced-search?query=${encodeURIComponent(query)}`)
+  AdvancedSearch(query: string): Observable<any> {
+    return this.http.get<any>(`${this.auth.getEndpoint()}/search/advance/${encodeURIComponent(query)}`)
 
   }
 
@@ -28,6 +28,6 @@ export class SearchService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get<Thesis>(`${this.auth.getEndpoint()}/thesis-description/${doc_id}`,{headers})
+    return this.http.get<Thesis>(`${this.auth.getEndpoint()}/description/${doc_id}`,{headers})
   }
 }

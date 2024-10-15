@@ -1,8 +1,9 @@
-<h2 mat-dialog-title style="margin-bottom: 0px !important;">แก้ไขชื่ออาจารย์ที่ปรึกษา</h2>
+<div *ngIf="Selected_advisor">
+    <h2 mat-dialog-title style="margin-bottom: 0px !important;">แก้ไขชื่ออาจารย์ที่ปรึกษา</h2>
 <form action=""  (ngSubmit)="EditAdvisor(Selected_advisor!.advisor_id)" >
     <div mat-dialog-content>
-        <label class="form-label" for="email">ชื่ออาจารย์ที่ปรึกษา</label>
-        <input class="form-control" type="email" [(ngModel)]="Selected_advisor!.advisor_name" [ngModelOptions]="{standalone: true}">
+        <label class="form-label" for="advisor_name">ชื่ออาจารย์ที่ปรึกษา</label>
+        <input class="form-control" type="text" [(ngModel)]="Selected_advisor!.advisor_name" [ngModelOptions]="{standalone: true}">
     </div>
     <div mat-dialog-actions>
         <button mat-button (click)="onNoClick()">ยกเลิก</button>
@@ -11,4 +12,5 @@
 
 </form>
 
+</div>
 

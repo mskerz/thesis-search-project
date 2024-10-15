@@ -1,1 +1,41 @@
-<p>edit-thesis works!</p>
+<div class="container mt-1" style="padding: 20px; position: relative;">
+    <!-- ปุ่มปิด -->
+    <button type="button" class="btn-close" aria-label="Close" (click)="onClose()" style="position: absolute; top: 10px; right: 10px;"></button>
+  
+    <div class="border-import col-5 mx-auto" *ngIf="selected_thesis">
+      <p class="text-center fs-5">ข้อมูลปริญญานิพนธ์</p>
+      <form (ngSubmit)="onEdit(selected_thesis!.doc_id)">
+        <!-- เนื้อหาฟอร์ม -->
+        <div class="form-group">
+          <label for="title_th">หัวข้อภาษาไทย</label>
+          <input type="text" class="form-control" id="title_th" [(ngModel)]="selected_thesis!.title_th" [ngModelOptions]="{standalone: true}"/>
+        </div>
+        <div class="form-group">
+          <label for="title_en">หัวข้อภาษาอังกฤษ</label>
+          <input type="text" class="form-control" id="title_en" [(ngModel)]="selected_thesis!.title_en" [ngModelOptions]="{standalone: true}" />
+        </div>
+        <div class="form-group mt-1">
+          <div class="d-flex flex-row align-items-center justify-content-between">
+            <div class="grid-item">
+              <label for="advisor" class="mb-2">ข้อมูลอาจารย์ที่ปรึกษา</label>
+              <select class="form-select" id="advisor" [(ngModel)]="selected_thesis!.advisor_id" name="advisor_id" required [ngModelOptions]="{standalone: true}">
+                <option value="0" [disabled]="true">เลือกอาจารย์ที่ปรึกษา</option>
+                <option *ngFor="let advisor of Advisors" [value]="advisor.advisor_id">
+                  {{ advisor.advisor_name }}
+                </option>
+              </select>
+            </div>
+            <div class="grid-item">
+              <label class="form-label">ปีการศึกษา</label>
+              <input class="form-control" type="number" [(ngModel)]="selected_thesis!.year" name="year" required [ngModelOptions]="{standalone: true}" />
+            </div>
+          </div>
+        </div>
+  
+        <button class="btn btn-success d-block mx-auto mt-3 fs-5" type="submit">
+          แก้ไข
+        </button>
+      </form>
+    </div>
+  </div>
+  

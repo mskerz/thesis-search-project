@@ -53,7 +53,7 @@
     <div class="mt-2">
       <!-- Skeleton Loader -->
       <div class="skeleton-container mt-2" *ngIf="isLoading">
-        <div *ngFor="let _ of [].constructor(2)" class="flex border p-4 mt-2">
+        <div *ngFor="let _ of [].constructor(2)" class="flex border p-4 mt-1 rounded-2">
           <p-skeleton styleClass="mb-2"></p-skeleton>
           <p-skeleton styleClass="mb-2"></p-skeleton>
           <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
@@ -75,9 +75,9 @@
       </div>
 
       <!-- Search Results Display -->
-      <div *ngIf="!isLoading && isSearched">
+      <div *ngIf="!isLoading && isSearched && thesisLength !== 0">
         <div *ngFor="let item of paginatedThesis">
-          <div class="container border p-4 mt-1 bg">
+          <div class="container border p-4 mt-1 rounded-2" id="thesis-selector">
             <a
               (click)="openLinkInNewTab('/decription/thesis/' + item.doc_id)"
               target="_blank"
@@ -85,7 +85,7 @@
             >
               <p class="fw-bold">{{ item.title_th }}</p>
             </a>
-            <p>เจ้าของผลงาน : {{ item.author_name }}</p>
+            <p>{{ item.author_name }}</p>
             <p>{{ item.year }}</p>
           </div>
         </div>

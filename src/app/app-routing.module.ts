@@ -17,6 +17,7 @@ import { ManageAdvisorComponent } from './page/role/admin/manage-advisor/manage-
 import { ManageThesisComponent } from './page/role/admin/manage-thesis/manage-thesis.component';
 import { ManageStudentComponent } from './page/role/admin/manage-student/manage-student.component';
 import { MyThesisComponent } from './page/my-thesis/my-thesis.component';
+import { ResetPasswordLinkGuard } from './guard/resetpassword.guard';
 const routes: Routes = [
   {path :'',component:RootComponent,children:[
     {path:'',component:SimpleSearch},
@@ -25,7 +26,7 @@ const routes: Routes = [
     {path:'simple-search',component:SimpleSearch,title:'ค้นหาแบบง่าย'},
     {path: 'advance-search',component:AdvanceSearch,title:'ค้นหาแบบขั้นสูง'},
     {path: 'decription/thesis/:doc_id',component:ThesisDecriptionComponent,title:'รายละเอียดของปริญญานิพนธ์'},
-    {path: 'login',component:LoginComponent,title: 'เข้าสู่ระบบ'},
+    {path: 'login',component:LoginComponent,title: 'เข้าสู่ระบบ'  },
     {path: 'register',component:RegisterComponent,title:'สมัครสมาชิก'},
     {path:'account/change-password',component:ChangePasswordComponent,canActivate:[AuthGuard]},
     {path: 'accoount/change-info',component:ChangeInfoComponent,title:'เปลี่ยนข้อมูลส่วนตัว',canActivate:[AuthGuard]},
@@ -33,7 +34,7 @@ const routes: Routes = [
     {path:'account/student/thesis',component:MyThesisComponent,title:'ปริญญานิพนธ์ของฉัน'},
     {path:'forgot-password',component:ForgotPasswordSendEmailComponent,title:'ลืมรหัสผ่าน'},
     {path:'send-token',component:ForgotPasswordSendTokenComponent,title:'รหัสยืนยัน'},
-    {path:'reset-password', component:ForgotPasswordNewPasswordComponent,title:'ตั้งรหัสผ่านใหม่',canActivate: [AuthGuard]},
+    {path:'reset-password', component:ForgotPasswordNewPasswordComponent,title:'ตั้งรหัสผ่านใหม่',canActivate: [ResetPasswordLinkGuard]},
     {path:'account/admin/advisors-manage',component:ManageAdvisorComponent,title:'อาจารย์ที่ปรึกษาปริญญานิพนธ์'},
     {path:'account/admin/thesis-upload',component:ManageThesisComponent,title:'รายการปริญญานิพนธ์ที่ต้องตรวจสอบ'},
     {path:'account/admin/student',component:ManageStudentComponent,title:'สิทธิการใช้งาน'}

@@ -62,8 +62,7 @@ export class RegisterComponent  {
         if(res.status_code === 200) {
           Swal.fire({
             icon: 'success',
-            title: 'Success',
-            text: 'Registration successful!',
+            text: 'สมัครสมาชิกสำเร็จ',
           }).then(() => {
             this.router.navigate(['/login']);
           });

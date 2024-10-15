@@ -26,7 +26,7 @@
     <!-- Search Results Count -->
     <div class="mt-1" *ngIf="thesisLength !== 0 && !isLoading">
       <p class="text-black-50 fs-6">
-        ผลการค้นหาทั้งหมด {{ thesisLength }} รายการสำหรับ
+        ผลการค้นหาทั้งหมด {{ thesisLength }} รายการสำหรับ <br><br>
         <span *ngFor="let item of querys; let last = last">
           <span [innerHTML]="highlight(item)"></span>
           <span *ngIf="!last">, </span>
@@ -46,27 +46,25 @@
         </div>
       </div>
       <div *ngIf="!isLoading && thesisLength === 0">
-        <div class="d-flex flex-column justify-content-center align-items-center">
+        <div
+          class="d-flex flex-column justify-content-center align-items-center"
+        >
           <img
             src="./../../../assets/image/document_vector.svg"
             class="img-fluid gray-img"
             alt="Document Vector"
             width="50%"
-
-
           />
-          <h2 class="text-secondary">ไม่พบเอกสารที่ค้นหา</h2>
+          <h2 class="text-secondary">
+            {{ isSearched ? "ไม่พบเอกสารที่ค้นหา" : "โปรดค้นหาเอกสาร" }}
+          </h2>
         </div>
       </div>
 
       <!-- Search Results Display -->
-      <div *ngIf="!isLoading">
-        <div
-          *ngFor="
-            let item of thesisList
-              | paginate : { itemsPerPage: 5, currentPage: page }
-          "
-        >
+      <div *ngIf="!isLoading && isSearched">
+        
+        <div *ngFor="let item of paginatedThesis">
           <div class="container border p-4 mt-1 bg">
             <a
               (click)="openLinkInNewTab('/decription/thesis/' + item.doc_id)"
@@ -75,21 +73,22 @@
             >
               <p class="fw-bold">{{ item.title_th }}</p>
             </a>
-            <p>เจ้าของ : {{ item.author_name }}</p>
+            <p>{{ item.author_name }}</p>
             <p>{{ item.year }}</p>
+            <p class="fst-italic"  style="font-size: 10px;">คะแนน TF-IDF: {{FormatScore(item.tf_idf_score)}}</p>
           </div>
         </div>
+      </div>
 
         <!-- Pagination Controls -->
-        <div
-          class="d-flex justify-content-center mt-3"
-          *ngIf="thesisLength !== 0"
-        >
-          <pagination-controls
-            (pageChange)="page = $event"
-          ></pagination-controls>
-        </div>
-      </div>
+        <!-- Pagination Controls -->
+        <p-paginator
+          [rows]="rowsPerPage"
+          [totalRecords]="thesisLength"
+          (onPageChange)="onPageChange($event)"
+          *ngIf="thesisLength != 0 && !isLoading"
+        ></p-paginator>
+      
     </div>
   </div>
 </div>

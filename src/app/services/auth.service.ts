@@ -44,7 +44,7 @@ export class AuthService {
     const token = this.cookie.get('access_token');
 
     if (token) {
-      this.http.get<any>(this.endpoint+"/verify_user").subscribe(
+      this.http.get<any>(this.endpoint+"/user/verify").subscribe(
         userInfo => {
           const user = UserConvert.json_toUser(JSON.stringify(userInfo));
           this.currentUser.next(user);
@@ -73,11 +73,11 @@ export class AuthService {
     return !!this.cookie.get('access_token')
   }
   sendEmail(email: string){
-    return this.http.post<any>(this.endpoint+"/forgot_password",{"email": email})
+    return this.http.post<any>(this.endpoint+"/forgot-password",{"email": email})
   }
 
   ResetPassword(reset_password_data: { token: string, new_password: string }){
-    return this.http.put<any>(this.endpoint+"/new_password", reset_password_data);
+    return this.http.put<any>(this.endpoint+"/new-password", reset_password_data);
   }
  
   logout() {
@@ -94,10 +94,10 @@ export class AuthService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
-    return this.http.put<any>(this.endpoint+'/change_info',profile_change,{headers});
+    return this.http.put<any>(this.endpoint+'/change-info',profile_change,{headers});
   }
 
   changePassword(password_change:any){
-    return this.http.put<any>(this.endpoint+'/change_password',password_change);
+    return this.http.put<any>(this.endpoint+'/change-password',password_change);
   }
 }

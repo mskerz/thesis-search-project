@@ -1,10 +1,9 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component,  OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { PdfviewerComponent } from 'src/app/component/dialog/pdfviewer/pdfviewer.component';
+import { EditThesisComponent } from 'src/app/component/popup/edit-thesis/edit-thesis.component';
 import { ThesisUploadList } from 'src/app/models/ThesisUpload.model';
 import { DownloadService } from 'src/app/services/download.service';
-import { FilePreviewService } from 'src/app/services/filepreview.service';
 import { ThesisService } from 'src/app/services/thesis.service';
 import Swal from 'sweetalert2';
 
@@ -22,6 +21,7 @@ export class ManageThesisComponent implements OnInit {
     'advisor_name',
     'recheck_status',
     'file_name',
+    'manage_thesis'
   ];
   isEditing: { [docId: number]: boolean } = {}; // เปลี่ยนเป็น object ที่มีคีย์เป็น number
 
@@ -40,11 +40,13 @@ export class ManageThesisComponent implements OnInit {
     private thesisService: ThesisService,
     private file: DownloadService,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private cdr:ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.Fetch();
+    
   }
 
   Fetch() {
@@ -85,8 +87,8 @@ export class ManageThesisComponent implements OnInit {
       (error) => {
         Swal.fire({
           icon:'error',
-          title:'แจ้งเตือนข้อผิดพลาด',
-          text:'ไม่พบไฟล์ที่คุณร้องขอ'
+          title:'ข้อผิดพลาด',
+          text:'ไม่สามารถเปิดไฟล์ได้ เนื่องจากไฟล์นี้อาจไม่มีอยู่'
         })
         console.error('Error downloading PDF:', error);
         // จัดการเมื่อเกิดข้อผิดพลาด
@@ -134,8 +136,10 @@ export class ManageThesisComponent implements OnInit {
       text: 'ยืนยันการตรวจสอบเอกสาร',
       icon: 'warning',
       showCancelButton: true,
+      confirmButtonColor: '#27B758',
+      cancelButtonColor: 'gray',
+      cancelButtonText:"ยกเลิก",
       confirmButtonText: 'ตกลง',
-      cancelButtonText: 'ยกเลิก',
     }).then((result) => {
       if (result.isConfirmed) {
         this.Recheck(docId, newStatus);
@@ -218,4 +222,52 @@ export class ManageThesisComponent implements OnInit {
     // Filter out "Wait" status options if needed
     return this.statusOptions.filter((option) => option.value !== 0);
   }
+  
+  
+  OpenThesisEditDialog(doc_id:number){
+    this.dialog.open(EditThesisComponent,{
+      width:'800px',
+      data:{ docId: doc_id },
+      disableClose:true
+    }).afterClosed().subscribe(res=>{
+      this.cdr.detectChanges();
+      this.Fetch();
+      this.updatePagination();
+    })
+  }
+
+
+  deleteThesis(doc_id:number){
+    Swal.fire({
+      text: 'ยืนยันการลบปริญญานิพนธ์',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#27B758',
+      cancelButtonColor: 'gray',
+      cancelButtonText:"ยกเลิก",
+      confirmButtonText: 'ตกลง',
+    }).then((res)=>{
+      if(res.isConfirmed){
+        this.thesisService.deleteThesis(doc_id).subscribe(res=>{
+          Swal.fire({
+            icon:'success',
+            title:'ลบปริญญานิพนธ์นี้เรียบร้อยแล้ว'
+          })
+          this.Fetch();
+      },(err)=>{
+        console.error("Error with Delete Fail: " + err);
+        Swal.fire({
+          icon:'warning',
+          title:'ไม่สามารถลบปริญญานิพนธ์ได้'
+        })
+        
+      });
+      }
+
+    })
+      
+  }
 }
+
+
+

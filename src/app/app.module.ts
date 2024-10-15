@@ -39,7 +39,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { SkeletonModule } from 'primeng/skeleton';
-import { PdfviewerComponent } from './component/dialog/pdfviewer/pdfviewer.component';
 import { SafePipe } from './pipes/safe.pipe';
 import { PaginatorModule } from 'primeng/paginator';
 import { TagModule } from 'primeng/tag';
@@ -79,7 +78,6 @@ import { MyThesisComponent } from './page/my-thesis/my-thesis.component'
     ForgotPasswordSendTokenComponent,
     ForgotPasswordNewPasswordComponent,
     ManageStudentComponent,
-    PdfviewerComponent,
     SafePipe,
     MyThesisComponent,
   ],
@@ -104,7 +102,8 @@ import { MyThesisComponent } from './page/my-thesis/my-thesis.component'
       provide:HTTP_INTERCEPTORS,
       useClass:CacheInterceptor,
       multi: true
-    }
+    },
+     
   ],
   bootstrap: [AppComponent]
 })

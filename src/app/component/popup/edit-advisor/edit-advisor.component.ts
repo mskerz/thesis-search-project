@@ -42,6 +42,14 @@ export class EditAdvisorComponent {
   }
 
   EditAdvisor(advisor_id:number){
+    if (this.Selected_advisor?.advisor_name) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'กรุณากรอกข้อมูลอาจารย์ที่ปรึกษา'
+      });
+      return;
+    }
+
     const advisor ={
       advisor_name:this.Selected_advisor!.advisor_name
     }
@@ -49,7 +57,7 @@ export class EditAdvisorComponent {
       console.log(res);
       Swal.fire({
         icon: 'success',
-        title: 'Advisor Updated !'
+        title: 'แก้ไขข้อมูลอาจารย์ที่ปรึกษาสำเร็จ'
       }).then(() => {
         this.dialogRef.close(res);
       },

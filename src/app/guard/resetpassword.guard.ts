@@ -33,6 +33,7 @@ export const ResetPasswordLinkGuard: CanActivateFn = (route, state) => {
         return true;
     }
       if (!isLoggedIn) {
+        
         router.navigate(['/login']); // Navigate after Swal is closed
         return false;
       }

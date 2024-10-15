@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit  {
   loggedIn: Observable<boolean>;
   userRole: number | null = null;
   currentUser: User | null = null;
-  hasDeleted: boolean = false;
+
 
   constructor(private authService: AuthService,private stdService:StudentService){
     this.loggedIn = this.authService.isLoggedIn();
@@ -35,10 +35,7 @@ export class NavbarComponent implements OnInit  {
       this.userRole = role;
     });
 
-    this.stdService.thesisStatus$.subscribe(status=>{
-      this.hasDeleted = status
-    })  
-    this.stdService.updateThesisStatus();
+
 
   }
 

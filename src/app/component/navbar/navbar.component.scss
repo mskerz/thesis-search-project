@@ -20,3 +20,17 @@
     height: 40px; /* ปรับขนาดความสูงของโลโก้ */
     display: inline-block; /* ทำให้โลโก้แสดงในบรรทัดเดียวกับข้อความ */
 }
+
+@media (max-width: 768px) { /* ขนาดหน้าจอที่คุณต้องการกำหนด */
+    .mat-menu-panel {
+      display: block !important; /* แสดงเป็น popup */
+      position: absolute; /* ตั้งตำแหน่งให้เหมาะสม */
+      z-index: 1000; /* ให้แน่ใจว่ามันอยู่ด้านบน */
+    }
+  
+    .mat-menu-trigger {
+      display: block !important; /* ทำให้ไอคอนสำหรับเปิดเมนูแสดง */
+      cursor: pointer; /* เปลี่ยนเคอร์เซอร์เป็น pointer */
+    }
+  }
+  

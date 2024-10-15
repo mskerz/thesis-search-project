@@ -16,6 +16,7 @@ export class SimpleSearchComponent implements OnInit {
   thesisList = new Array<ThesisList>();
   page: number = 1;
   thesisLength = 0;
+  layout: 'list' | 'grid' = 'list';
   autocompleteQueries: string[] = [];
   filteredQueries: string[] = [];
   suggestionsVisible: boolean = false; // Add this to control visibility
@@ -48,7 +49,6 @@ export class SimpleSearchComponent implements OnInit {
       this.query = params['query'] || ''; // ใช้ค่าจาก URL หรือค่าว่าง
       if (this.field && this.query) {
         this.onSimpleSearch(); // ทำการค้นหาทันทีถ้ามีค่าใน field และ query
-        
       }else {
         this.isSearched = false; // ถ้าไม่มีค่าให้เป็น false
         this.thesisList = []; // รีเซ็ตผลลัพธ์
@@ -67,7 +67,6 @@ export class SimpleSearchComponent implements OnInit {
       
           // สร้าง URL ใหม่
       this.router.navigate(['/simple-search'], { queryParams: { field: this.field, query: this.query } });
-
       setTimeout(() => {
         this.search
           .SimpleSearch(this.field, this.query)

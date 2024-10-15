@@ -15,3 +15,23 @@
     background-color: #27a04f !important;
 
 }
+
+
+
+.loader {
+    border: 8px solid #f3f3f3; /* สีของวงกลม */
+    border-top: 8px solid #3498db; /* สีของวงกลมที่หมุน */
+    border-radius: 50%;
+    width: 40px; /* ขนาดวงกลม */
+    height: 40px; /* ขนาดวงกลม */
+    animation: spin 1s linear infinite; /* กำหนดการหมุน */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

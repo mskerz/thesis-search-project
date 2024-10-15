@@ -10,6 +10,8 @@ export interface ThesisResponse {
 
 export interface ThesisCheckResponse {
   has_deleted: boolean;
+  has_thesis: boolean;
+  has_rejected: boolean;
   thesis?: ThesisResponse;
 }
 

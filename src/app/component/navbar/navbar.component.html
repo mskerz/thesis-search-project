@@ -18,24 +18,24 @@
       <ul class="navbar-nav" style="margin-left: auto;" *ngIf="!(loggedIn|async)">
         <li class="nav-item"  >
           <a class="nav-link" routerLink="/login" style="color: rgb(255, 255, 255); text-decoration: none;">
-            <i class="bi bi-box-arrow-in-right"></i> Login
+            <i class="bi bi-box-arrow-in-right"></i> เข้าสู่ระบบ
           </a>
         </li>
         <li class="nav-item"  >
           <a class="nav-link" routerLink="/register" style="color: rgb(255, 255, 255); text-decoration: none;">
-            <i class="bi bi-person-fill"></i> Signup
+            <i class="bi bi-person-fill"></i> สมัครสมาชิก
           </a>
         </li>
       </ul>
       <ul class="navbar-nav" style="margin-left: auto;" *ngIf="(loggedIn|async)">
         <a class="nav-link" mat-menu-trigger [matMenuTriggerFor]="userMenu" style="color: rgb(255, 255, 255); text-decoration: none; cursor: pointer;">
-          <i class="bi bi-person"></i> {{ userRole === 0 ? 'นิสิต' : 'ผู้ดูแลระบบ' }}
+          <i class="bi bi-person"></i> {{ userRole === 0 ? 'นิสิต : '+currentUser?.firstname  : 'ผู้ดูแลระบบ : '+currentUser?.firstname }}
         </a>
         <li class="nav-item">
           <mat-menu #userMenu="matMenu">
             <mat-card class="user-card " >
               <mat-card-content>
-                <div>{{ currentUser?.firstname }} - {{ currentUser?.lastname }}</div>
+                <div>คุณ{{ currentUser?.firstname }} - {{ currentUser?.lastname }}</div>
                 <div>{{currentUser?.email}}</div>
               </mat-card-content>
             </mat-card>            <button mat-menu-item routerLink="/accoount/change-info">
@@ -64,7 +64,7 @@
               <i class="bi bi-upload"></i> {{ hasThesis ? 'แก้ไขปริญญานิพนธ์' : 'อัพโหลดปริญญานิพนธ์' }}
             </button> -->
             <button mat-menu-item (click)="logout()">
-              <i class="bi bi-box-arrow-right"></i> Logout
+              <i class="bi bi-box-arrow-right"></i> ออกจากระบบ
             </button>
           </mat-menu>
 

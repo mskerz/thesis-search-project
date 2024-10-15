@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
 
@@ -9,33 +9,59 @@ import Swal from 'sweetalert2';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
-  
+export class LoginComponent implements OnInit {
+  returnUrl = ''
   form_login ={
     email :'wichasin.s@gmail.com',
     password: '12345678'
   }
-  constructor( private router: Router, private authService: AuthService) {
+  constructor( private router: Router, private authService: AuthService,        private route: ActivatedRoute,
+  )  {
   
   }
 
+  ngOnInit(): void {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    console.log("returnUrl : " + this.returnUrl);
+    
+
+  }
 
   onSubmit() {
     if(!this.form_login){
-      Swal.fire('กรุณากรอกข้อมูลให้ครบ!')
+      Swal.fire({
+        icon:'warning',
+        title:'กรุณากรอกข้อมูลให้ครบ!'
+      })
       return;
     }
     this.authService.login(this.form_login).subscribe(
       response => {
         // Handle successful login
         console.log(response.status_code);
+        Swal.fire({
+          icon:'success',
+          title:'เข้าสู่ระบบสำเร็จ'
+        }).then(()=>{
+          this.router.navigateByUrl(this.returnUrl);
+        })
         
-        this.router.navigate(['/simple-search']);
       },
       error => {
         // Handle login error
         if(error.status==404){
-          Swal.fire('Login is Empty or Invalid')
+          Swal.fire({
+            icon:'error',
+            title:'ไม่สามารถเข้าสู่ระบบได้',
+            text: 'ไม่พบข้อมูลผู้ใช้นี้ในระบบ'
+          })
+        }
+        if(error.status==400){
+          Swal.fire({
+            icon:'error',
+            title:'ไม่สามารถเข้าสู่ระบบได้',
+            text: 'รหัสผ่านคุณไม่ถูกต้อง'
+          })
         }
 
         

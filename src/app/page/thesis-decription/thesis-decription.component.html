@@ -3,28 +3,28 @@
     <div class="card-header">
       <h5 class="card-title fs-5">รายละเอียดปริญญานิพนธ์</h5>
     </div>
-    <div class="card-body">
+    <div class="card-body" *ngIf="SelectedThesis">
       <table class="table table-borderless"> <!-- เพิ่ม class ของ table และ table-borderless เพื่อไม่ให้แสดงเส้นขอบ -->
         <tbody>
           <tr>
             <th scope="row" class="fw-bold">หัวข้อ:</th>
-            <td>{{ this.SelectedThesis?.title_th }}</td>
+            <td>{{ this.SelectedThesis.title_th }}</td>
           </tr>
           <tr>
             <th scope="row" class="fw-bold" style="white-space: nowrap;">หัวข้อ (Other):</th>
-            <td>{{ this.SelectedThesis?.title_en }}</td>
+            <td>{{ this.SelectedThesis.title_en }}</td>
           </tr>
           <tr>
             <th scope="row" class="fw-bold">ผู้เขียน:</th>
-            <td>{{ this.SelectedThesis?.author_name }}</td>
+            <td>{{ this.SelectedThesis.author_name }}</td>
           </tr>
           <tr>
             <th scope="row" class="fw-bold" style="white-space: nowrap;">อาจารย์ที่ปรึกษา:</th>
-            <td>{{ this.SelectedThesis?.advisor_name }}</td>
+            <td>{{ this.SelectedThesis.advisor_name }}</td>
           </tr>
           <tr>
             <th scope="row" class="fw-bold">ปีการศึกษา:</th>
-            <td>{{ this.SelectedThesis?.year }}</td>
+            <td>{{ this.SelectedThesis.year }}</td>
           </tr>
           <tr>
             <th scope="row" class="fw-bold">URL:</th>
@@ -32,13 +32,13 @@
           </tr>
           <tr>
             <th scope="row" class="fw-bold">บทคัดย่อ:</th>
-            <td style="max-width: 50%;">{{ this.SelectedThesis?.abstract }}</td> <!-- เพิ่ม max-width เพื่อกำหนดความกว้างสูงสุด -->
+            <td style="max-width: 50%;">&nbsp;&nbsp;{{ this.SelectedThesis.abstract }}</td> <!-- เพิ่ม max-width เพื่อกำหนดความกว้างสูงสุด -->
           </tr>
           <tr *ngIf="(loggedIn|async)">
             <th scope="row" class="fw-bold" ><i class="bi bi-file-earmark-pdf" ></i> ไฟล์</th>
             
 
-            <td style="max-width: 50%;"><button class="btn" (click)="Download_PDF(this.SelectedThesis?.author_name!,this.SelectedThesis?.doc_id)"><i class="bi bi-download"></i> Download</button></td> <!-- เพิ่ม max-width เพื่อกำหนดความกว้างสูงสุด -->
+            <td style="max-width: 50%;"><button class="btn" (click)="Download_PDF(this.SelectedThesis.author_name!,this.SelectedThesis.doc_id)"><i class="bi bi-download"></i> Download</button></td> <!-- เพิ่ม max-width เพื่อกำหนดความกว้างสูงสุด -->
           </tr>
           <tr *ngIf="!(loggedIn|async)">
             <th scope="row" class="fw-bold" ></th>
@@ -49,6 +49,12 @@
           </tr>
         </tbody>
       </table>
+    </div>
+
+    <div class="card-body" *ngIf="!SelectedThesis">
+        <div class="container m-3 p-2">
+          ปริญญานิพนธ์อาจไม่มีอยู่ หรือ ผู้ดูแลระบบอาจยังไม่ได้อนุมัติเอกสาร
+        </div>
     </div>
   </div>
 </div>

@@ -11,7 +11,8 @@ export class MyThesisComponent implements OnInit  {
   my_thesis!:ThesisResponse
   hasDeleted = false
   constructor(private student : StudentService ){
-    this.student.updateThesisStatus()
+    this.student.hasThesis();
+    student.ThesisHasDeleted()
   }
   ngOnInit(){
     this.FetchMyThesis()
@@ -25,10 +26,14 @@ export class MyThesisComponent implements OnInit  {
   }
 
   FetchMyThesis(){
-    this.student.checkThesis().subscribe((data=>{
+    this.student.checkThesis().subscribe((data)=>{
       this.hasDeleted = data.has_deleted
       this.my_thesis = ThesisCheckConvert.fromJson_toThesis(JSON.stringify(data.thesis))
-    }))
+    },(err)=>{
+      if(err.status === 404){
+
+      }
+    })
   }
 }
  
