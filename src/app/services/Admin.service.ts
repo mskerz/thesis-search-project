@@ -7,7 +7,7 @@ import { AuthService } from './auth.service';
 @Injectable({providedIn: 'root'})
 export class AdminService {
     constructor(private auth: AuthService,private http:HttpClient) { }
-    
+    // add github
     getAdminAll(): Observable<Admin[]> {
         return this.auth.getUserRole().pipe(
           switchMap(role => {
