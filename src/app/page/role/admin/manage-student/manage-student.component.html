@@ -37,7 +37,7 @@
               <p-dropdown
                 [options]="roleOption"
                 [(ngModel)]="student.access_role"
-                (onChange)="ConfirmRecheck(student.user_id)"
+                (onChange)="ConfirmRecheck(student.user_id,student.access_role)"
                 appendTo="body"
               ></p-dropdown>
             </ng-template>

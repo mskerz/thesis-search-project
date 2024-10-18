@@ -29,7 +29,7 @@
       </ul>
       <ul class="navbar-nav" style="margin-left: auto;" *ngIf="(loggedIn|async)">
         <a class="nav-link" mat-menu-trigger [matMenuTriggerFor]="userMenu" style="color: rgb(255, 255, 255); text-decoration: none; cursor: pointer;">
-          <i class="bi bi-person"></i> {{ userRole === 0 ? 'นิสิต : '+currentUser?.firstname  : 'ผู้ดูแลระบบ : '+currentUser?.firstname }}
+          <i class="bi bi-person"></i> {{ userRole === 0 ? 'นิสิต : '+currentUser?.firstname :userRole ===2? 'นิสิตเก่า : ' + currentUser?.firstname   : 'ผู้ดูแลระบบ : '+currentUser?.firstname }}
         </a>
         <li class="nav-item">
           <mat-menu #userMenu="matMenu">
@@ -44,7 +44,9 @@
             <button mat-menu-item routerLink="/account/change-password">
               <span><i class="bi bi-lock"></i> เปลี่ยนรหัสผ่าน</span>
             </button>
-
+            <button mat-menu-item  *ngIf="userRole==1" routerLink="/account/admin/dashboard">
+              <i class="bi bi-asterisk"></i> แดชบอร์ดผู้ดูแลระบบ
+            </button>
             <button mat-menu-item  *ngIf="userRole==1" routerLink="/account/admin/advisors-manage">
               <i class="bi bi-list"></i> ข้อมูลอาจารย์ที่ปรึกษา
             </button>
@@ -52,12 +54,16 @@
               <i class="bi bi-list-check"></i> ตรวจสอบการนำเข้าปริญญานิพนธ์
             </button>
             <button mat-menu-item  *ngIf="userRole==1" routerLink="/account/admin/student">
-              <i class="bi bi-asterisk"></i> เปลี่ยนสิทธิ์การใช้งานผู้ใช้
+              <i class="bi bi-asterisk"></i> เปลี่ยนสิทธิ์การใช้งานของนิสิต
+            </button>
+
+            <button mat-menu-item  *ngIf="userRole==1" routerLink="/account/admin/admin-management">
+              <i class="bi bi-asterisk"></i> จัดการผู้ดูแลระบบ
             </button>
             <button mat-menu-item *ngIf="userRole == 0" routerLink="/account/student/import-thesis">
               <i class="bi bi-upload"></i> อัพโหลดปริญญานิพนธ์
-            </button>
-            <button mat-menu-item *ngIf="userRole == 0" routerLink="/account/student/thesis"> 
+            </button> 
+            <button mat-menu-item *ngIf="userRole == 0 || userRole == 2" routerLink="/account/student/thesis"> 
               <i class="bi bi-file-earmark-pdf"></i> ปริญญานิพนธ์ของฉัน
             </button>
             <!-- <button mat-menu-item *ngIf="userRole == 0" routerLink="/account/student/import-thesis">

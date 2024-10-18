@@ -27,9 +27,9 @@ export class SimpleSearchComponent implements OnInit {
   paginatedThesis = new Array<ThesisList>();
 
   fields: { label: string; value: string }[] = [
-    { label: 'หัวข้อ (ไทย)', value: 'title_th' },
-    { label: 'หัวข้อ (อังกฤษ)', value: 'title_en' },
-    { label: 'ชื่อผู้เขียน', value: 'author_name' },
+    { label: 'ชื่อเรื่องภาษไทย', value: 'title_th' },
+    { label: 'ชื่อเรื่องภาษาอังกฤษ', value: 'title_en' },
+    { label: 'ชื่อผู้จัดทำ', value: 'author_name' },
     { label: 'อาจารย์ที่ปรึกษา', value: 'advisor_name' },
     { label: 'ปีการศึกษา', value: 'year' },
   ];

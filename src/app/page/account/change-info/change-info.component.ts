@@ -36,7 +36,7 @@ export class ChangeInfoComponent {
         Swal.fire({
           icon:'success',
           title:'แจ้งเตือน',
-          text:res.message,
+          text:"แก้ไขโปรไฟล์สำเร็จ !",
           confirmButtonText:'ตกลง'
         }
         ).then((res=>{

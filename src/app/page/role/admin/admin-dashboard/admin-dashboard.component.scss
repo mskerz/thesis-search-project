@@ -1,0 +1,18 @@
+ 
+
+  :host ::ng-deep .p-breadcrumb {
+    border: none;
+    padding: 0;
+  }
+  
+  .card {
+    background: var(--surface-card);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--card-shadow);
+  }
+
+  ::ng-deep .p-breadcrumb a {
+    text-decoration: none;
+}

@@ -4,6 +4,7 @@ import { AuthService } from './auth.service';
 import { BehaviorSubject, Observable, of, switchMap } from 'rxjs';
 import { ThesisCheckResponse } from '../models/hasThesis.model';
 import { Student } from '../models/student.model';
+import { Admin } from '../models/admin.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,19 +34,13 @@ export class StudentService {
     );
   }
 
+
+
+
     // New method: Change student's role
-    changeStudentRole(userId: number): Observable<any> {
-      return this.auth.getUserRole().pipe(
-        switchMap(role => {
-          if (role === 1) {
-            // Send PUT request to change the student's role to admin
-            return this.http.put(`${this.auth.getEndpoint()}/user/change-permission/${userId}`, {});
-          } else {
-            // If the user is not an admin, return an error or empty Observable
-            return of({ message: 'Permission denied', status_code: 403 });
-          }
-        })
-      );
+    changeStudentRole(userId: number,role:number): Observable<any> {
+      return this.http.put(`${this.auth.getEndpoint()}/user/change-permission/${userId}/role/${role}`, {});
+
     }
   
 

@@ -4,6 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { User, UserConvert } from '../models/user.model';
 import { Router } from '@angular/router';
+import { CacheService } from './Cache.service';
 
 
 @Injectable({
@@ -14,7 +15,7 @@ export class AuthService {
   private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
   private userRole = new BehaviorSubject<number | null>(null);
   private currentUser = new BehaviorSubject<User | null>(null);
-  constructor(private http:HttpClient,private cookie:CookieService,private route:Router) {
+  constructor(private http:HttpClient,private cookie:CookieService,private route:Router,private cacheQuery:CacheService) {
  
    }
   getEndpoint(){
@@ -84,7 +85,7 @@ export class AuthService {
     this.loggedIn.next(false);
     this.cookie.delete('access_token', '/', 'localhost', false, 'Lax');
     this.route.navigate(['/login']);
-    
+    this.cacheQuery.clearCache();
   }
 
 

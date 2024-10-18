@@ -22,7 +22,7 @@ export class ManageStudentComponent implements OnInit  {
 
   roleOption =[
     { label: 'นิสิต', value: 0 },
-    { label: 'ผู้ดูแลระบบ', value: 1 },
+    { label: 'ศิษย์เก่า', value: 2 },
   ];
   constructor(private stdService:StudentService) {
     
@@ -56,6 +56,7 @@ export class ManageStudentComponent implements OnInit  {
     switch (role) {
         case 1:
             return 'success';
+        case 2: return 'warning';
         default:
             return 'info';
     }
@@ -84,8 +85,8 @@ export class ManageStudentComponent implements OnInit  {
     this.isEditing[userId] = !this.isEditing[userId];
   }
   // Method to update the student's role
-  updateStatus(user_id: number): void {
-    this.stdService.changeStudentRole(user_id).subscribe(
+  updateStatus(user_id: number,role:number): void {
+    this.stdService.changeStudentRole(user_id,role).subscribe(
       response => {
         if (response.status_code === 200) {
           Swal.fire({
@@ -113,7 +114,7 @@ export class ManageStudentComponent implements OnInit  {
     );
   }
 
-  ConfirmRecheck(user_id:number){
+  ConfirmRecheck(user_id:number,role:number){
     Swal.fire({
       text:"ยืนยันการเปลี่ยนสิทธิ",
       icon: 'warning',
@@ -124,7 +125,7 @@ export class ManageStudentComponent implements OnInit  {
       confirmButtonText: 'ตกลง',
     }).then((result)=>{
       if(result.isConfirmed ){
-        this.updateStatus(user_id);
+        this.updateStatus(user_id,role);
         this.isEditing[user_id] = false;
       }
       

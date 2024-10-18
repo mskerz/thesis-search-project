@@ -46,10 +46,13 @@ import { ProgressSpinnerModule as Spinner } from 'primeng/progressspinner';
 import { PasswordModule } from 'primeng/password';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import {DialogModule} from 'primeng/dialog';
-import { MyThesisComponent } from './page/my-thesis/my-thesis.component'
+import { MyThesisComponent } from './page/my-thesis/my-thesis.component';
+import { ManageAdminComponent } from './page/role/admin/manage-admin/manage-admin.component';
+import { AdminDashboardComponent } from './page/role/admin/admin-dashboard/admin-dashboard.component'
 
-
-
+import { CardModule } from 'primeng/card';
+import {BreadcrumbModule} from 'primeng/breadcrumb';
+import {TableModule} from 'primeng/table';
 
 
 
@@ -80,6 +83,8 @@ import { MyThesisComponent } from './page/my-thesis/my-thesis.component'
     ManageStudentComponent,
     SafePipe,
     MyThesisComponent,
+    ManageAdminComponent,
+    AdminDashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,7 +93,8 @@ import { MyThesisComponent } from './page/my-thesis/my-thesis.component'
     BrowserAnimationsModule,
     DropdownModule,FormsModule,InputTextModule,InputTextModule,ButtonModule,MatMenuModule,MatCardModule,
     ReactiveFormsModule,MatIconModule,MatTableModule,MatButtonModule,NgxPaginationModule,MatDialogModule,AutoCompleteModule,
-    SkeletonModule,PaginatorModule,TagModule,Spinner,PasswordModule,FloatLabelModule,DialogModule
+    SkeletonModule,PaginatorModule,TagModule,Spinner,PasswordModule,FloatLabelModule,DialogModule,CardModule,
+    BreadcrumbModule,TableModule
     
     
   ],

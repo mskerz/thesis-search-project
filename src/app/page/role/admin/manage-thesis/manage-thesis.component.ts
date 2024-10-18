@@ -25,7 +25,7 @@ export class ManageThesisComponent implements OnInit {
   ];
   isEditing: { [docId: number]: boolean } = {}; // เปลี่ยนเป็น object ที่มีคีย์เป็น number
 
-  rowsPerPage = 7;
+  rowsPerPage = 8;
   totalRecords = 0;
   paginatedData = Array<ThesisUploadList>();
   currentPage = 1;

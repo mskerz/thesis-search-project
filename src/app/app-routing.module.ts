@@ -18,6 +18,8 @@ import { ManageThesisComponent } from './page/role/admin/manage-thesis/manage-th
 import { ManageStudentComponent } from './page/role/admin/manage-student/manage-student.component';
 import { MyThesisComponent } from './page/my-thesis/my-thesis.component';
 import { ResetPasswordLinkGuard } from './guard/resetpassword.guard';
+import { ManageAdminComponent } from './page/role/admin/manage-admin/manage-admin.component';
+import { AdminDashboardComponent } from './page/role/admin/admin-dashboard/admin-dashboard.component';
 const routes: Routes = [
   {path :'',component:RootComponent,children:[
     {path:'',component:SimpleSearch},
@@ -36,6 +38,9 @@ const routes: Routes = [
     {path:'send-token',component:ForgotPasswordSendTokenComponent,title:'รหัสยืนยัน'},
     {path:'reset-password', component:ForgotPasswordNewPasswordComponent,title:'ตั้งรหัสผ่านใหม่',canActivate: [ResetPasswordLinkGuard]},
     {path:'account/admin/advisors-manage',component:ManageAdvisorComponent,title:'อาจารย์ที่ปรึกษาปริญญานิพนธ์'},
+    {path:'account/admin/dashboard',component:AdminDashboardComponent,title:'แดชบอร์ดผู้ดูแลระบบ'},
+
+    {path:'account/admin/admin-management',component:ManageAdminComponent,title:'รายการผู้ดูแลระบบ'},
     {path:'account/admin/thesis-upload',component:ManageThesisComponent,title:'รายการปริญญานิพนธ์ที่ต้องตรวจสอบ'},
     {path:'account/admin/student',component:ManageStudentComponent,title:'สิทธิการใช้งาน'}
   ]}
