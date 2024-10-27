@@ -47,19 +47,7 @@
             <button mat-menu-item  *ngIf="userRole==1" routerLink="/account/admin/dashboard">
               <i class="bi bi-asterisk"></i> แดชบอร์ดผู้ดูแลระบบ
             </button>
-            <button mat-menu-item  *ngIf="userRole==1" routerLink="/account/admin/advisors-manage">
-              <i class="bi bi-list"></i> ข้อมูลอาจารย์ที่ปรึกษา
-            </button>
-            <button mat-menu-item  *ngIf="userRole==1" routerLink="/account/admin/thesis-upload">
-              <i class="bi bi-list-check"></i> ตรวจสอบการนำเข้าปริญญานิพนธ์
-            </button>
-            <button mat-menu-item  *ngIf="userRole==1" routerLink="/account/admin/student">
-              <i class="bi bi-asterisk"></i> เปลี่ยนสิทธิ์การใช้งานของนิสิต
-            </button>
-
-            <button mat-menu-item  *ngIf="userRole==1" routerLink="/account/admin/admin-management">
-              <i class="bi bi-asterisk"></i> จัดการผู้ดูแลระบบ
-            </button>
+          
             <button mat-menu-item *ngIf="userRole == 0" routerLink="/account/student/import-thesis">
               <i class="bi bi-upload"></i> อัพโหลดปริญญานิพนธ์
             </button> 

@@ -15,9 +15,10 @@ export class LoginComponent implements OnInit {
     email :'wichasin.s@gmail.com',
     password: '12345678'
   }
+  userRole: number | null = null;
   constructor( private router: Router, private authService: AuthService,        private route: ActivatedRoute,
   )  {
-  
+    
   }
 
   ngOnInit(): void {
@@ -28,6 +29,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+     
     if(!this.form_login){
       Swal.fire({
         icon:'warning',
@@ -43,7 +45,15 @@ export class LoginComponent implements OnInit {
           icon:'success',
           title:'เข้าสู่ระบบสำเร็จ'
         }).then(()=>{
-          this.router.navigateByUrl(this.returnUrl);
+          this.authService.getUserRole().subscribe(role => {
+            this.userRole = role;
+          });
+          if(this.userRole ==1){
+            this.router.navigate(['/account/admin/dashboard']);
+          }else{
+            this.router.navigateByUrl(this.returnUrl);
+          }
+          
         })
         
       },

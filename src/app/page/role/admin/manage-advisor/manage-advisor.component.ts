@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { AddAdvisorComponent } from 'src/app/component/popup/add-advisor/add-advisor.component';
 import { EditAdvisorComponent } from 'src/app/component/popup/edit-advisor/edit-advisor.component';
-import { Advisor } from 'src/app/models/advisor.model';
+import { Convert as AdvisorConvert,Advisor } from 'src/app/models/advisor.model';
 import { AdvisorService } from 'src/app/services/advisor.service';
 import Swal from 'sweetalert2';
 
@@ -28,8 +28,10 @@ export class ManageAdvisorComponent implements OnInit {
   }
   fetchAdvisors(){
     this.advisorService.fetchAdvisorAll().subscribe((data)=>{
-        this.Advisors = data;
+        this.Advisors = AdvisorConvert.fromJson_toAdvisor(JSON.stringify(data));
         this.totalRecords = data.length
+        console.log(this.Advisors);
+        
         this.updatePagination()
         
     },err=>{
@@ -45,15 +47,12 @@ export class ManageAdvisorComponent implements OnInit {
 
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        // Handle result if needed
-        console.log('Dialog closed with result:', result);
-        this.cdr.detectChanges();
-        this.fetchAdvisors();// Detect changes after dialog closes
-      }
-    });
-
+    dialogRef.componentInstance.advisorNew.subscribe((newAdvisor)=>{
+      this.Advisors.push(newAdvisor); // เพิ่มอาจารย์ที่ปรึกษาใหม่เข้ากับรายการ
+      this.totalRecords = this.Advisors.length; // อัปเดตจำนวนรวม
+      this.updatePagination(); // อัปเดตการแสดงผล
+    })
+ 
     
   }
 
@@ -64,19 +63,17 @@ export class ManageAdvisorComponent implements OnInit {
       data: { advisorId: advisor_id },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        // Handle result if needed
-        this.cdr.detectChanges();
-        this.fetchAdvisors();// Detect changes after dialog closes
-        this.table.renderRows(); // ทำให้ตาราง re-render
+   
+    dialogRef.componentInstance.advisorUpdated.subscribe((updateAdvisor:Advisor)=>{
+      const index = this.Advisors.findIndex(advisor => advisor.advisor_id === updateAdvisor.advisor_id);
+      if (index !== -1) {
+        this.Advisors[index] = updateAdvisor; // อัปเดตข้อมูลอาจารย์ที่ปรึกษาในอาเรย์
+        this.updatePagination(); // เรียกใช้ฟังก์ชันเพื่อตรวจสอบการแบ่งหน้า
       }
-    });
-
-    
+    })
   }
 
-  deleteAdvisor(advisor:any): void {
+  deleteAdvisor(advisor_id:number){
     Swal.fire({
       title: `ยืนยันการลบข้อมูลอาจารย์ที่ปรึกษา `,
       // text:advisor.advisor_name,
@@ -88,15 +85,19 @@ export class ManageAdvisorComponent implements OnInit {
       confirmButtonText: 'ตกลง',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.advisorService.deleteAdvisor(advisor.advisor_id).subscribe(
-          () => {
-            Swal.fire({
-              icon: 'success',
-              title: 'ลบข้อมูลอาจารย์ที่ปรึกษาสำเร็จ !',
-            });
-            this.cdr.detectChanges();
-            this.table.renderRows();
-                // Optionally, update UI or perform additional actions
+        this.advisorService.deleteAdvisor(advisor_id).subscribe(
+          (res:any) => {
+            if(res.status ===200){
+              Swal.fire({
+                icon: 'success',
+                title: 'ลบข้อมูลอาจารย์ที่ปรึกษาสำเร็จ !',
+              });
+              this.Advisors = this.Advisors.filter(
+                (advisor) => advisor.advisor_id !== advisor_id
+              );
+              this.totalRecords = this.Advisors.length; // อัปเดตจำนวนรวมของผู้ดูแลระบบ
+              this.updatePagination();
+            }
           },
           (error) => {
             console.error('Failed to delete advisor:', error);

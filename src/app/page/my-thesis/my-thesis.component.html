@@ -25,9 +25,9 @@
             <p class="card-text text-justify">
               <em>{{ my_thesis.abstract }}</em>
             </p>
-            <div class="float-sm-start">
-              
-              <a *ngIf="hasDeleted" routerLink="/account/student/import-thesis" class="btn btn-secondary">เอกสารของคุณถูกปฏิเสธ กรุณาอัพโหลดอีกครั้ง <i class="bu bi-arrow-clockwise"></i></a>
+            <div class="float-sm-start" *ngIf="hasDeleted">
+              <p-messages class="small-message" [(value)]="message" [closable]="false"></p-messages>
+              <a  routerLink="/account/student/import-thesis" class="btn btn-secondary">อัพโหลดอีกครั้ง <i class="bu bi-arrow-clockwise"></i></a>
             </div>
           </div>
         </div>

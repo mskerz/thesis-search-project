@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AdvisorService } from 'src/app/services/advisor.service';
 import Swal from 'sweetalert2';
+import { faker } from '@faker-js/faker';
 
 @Component({
   selector: 'app-add-advisor',
@@ -9,8 +10,9 @@ import Swal from 'sweetalert2';
   styleUrls: ['./add-advisor.component.scss']
 })
 export class AddAdvisorComponent {
+  @Output() advisorNew = new EventEmitter<any>();
   advisor={
-    advisor_name:''
+    advisor_name:this.advisorService.generateFakeAdvisor()
   }
   constructor(public dialogRef: MatDialogRef<AddAdvisorComponent>,private advisorService: AdvisorService){}
   onNoClick(): void {
@@ -34,11 +36,17 @@ export class AddAdvisorComponent {
         console.log('New advisor added:', response);
         // Optionally, notify user of success
         if(response.status_code === 200) {
+          const newAdvisor = {
+            advisor_id:response.new_advisorId, // รับ advisor_id จาก response
+            advisor_name:this.advisor.advisor_name
+          }
+
           Swal.fire({
             icon: 'success',
-            title: 'Advisor added successfully!'
+            title: 'เพิ่มข้อมูลอาจารย์ที่ปรึกษาสำเร็จ!'
           }).then(() => {
-            this.dialogRef.close(response);
+            this.advisorNew.emit(newAdvisor);
+            this.dialogRef.close();
           });
         }
 

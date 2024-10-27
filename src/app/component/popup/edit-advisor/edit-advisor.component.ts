@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Advisor } from 'src/app/models/advisor.model';
 import { AdvisorService } from 'src/app/services/advisor.service';
@@ -9,7 +9,9 @@ import Swal from 'sweetalert2';
   templateUrl: './edit-advisor.component.html',
 })
 export class EditAdvisorComponent {
-  Selected_advisor?:Advisor
+  @Output() advisorUpdated = new EventEmitter<Advisor>(); // สร้าง EventEmitter
+
+   Selected_advisor?:Advisor
   constructor(
     public dialogRef: MatDialogRef<EditAdvisorComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,private advisorService: AdvisorService
@@ -42,7 +44,7 @@ export class EditAdvisorComponent {
   }
 
   EditAdvisor(advisor_id:number){
-    if (this.Selected_advisor?.advisor_name) {
+    if (!this.Selected_advisor!.advisor_name) {
       Swal.fire({
         icon: 'warning',
         title: 'กรุณากรอกข้อมูลอาจารย์ที่ปรึกษา'
@@ -51,6 +53,7 @@ export class EditAdvisorComponent {
     }
 
     const advisor ={
+      advisor_id:advisor_id,
       advisor_name:this.Selected_advisor!.advisor_name
     }
     this.advisorService.EditAdvisor(advisor_id,advisor).subscribe(res=>{
@@ -59,7 +62,8 @@ export class EditAdvisorComponent {
         icon: 'success',
         title: 'แก้ไขข้อมูลอาจารย์ที่ปรึกษาสำเร็จ'
       }).then(() => {
-        this.dialogRef.close(res);
+         this.advisorUpdated.emit(advisor)
+         this.dialogRef.close();
       },
       (error) => {
         console.error('Error adding advisor:', error);

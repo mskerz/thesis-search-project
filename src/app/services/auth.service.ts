@@ -9,9 +9,9 @@ import { CacheService } from './Cache.service';
 
 @Injectable({
   providedIn: 'root'
-})
+}) 
 export class AuthService {
-  private endpoint = 'http://127.0.0.1:8000/api'
+  private endpoint = 'http://localhost:8000/api'
   private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
   private userRole = new BehaviorSubject<number | null>(null);
   private currentUser = new BehaviorSubject<User | null>(null);

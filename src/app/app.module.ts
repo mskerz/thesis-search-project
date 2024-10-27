@@ -53,6 +53,8 @@ import { AdminDashboardComponent } from './page/role/admin/admin-dashboard/admin
 import { CardModule } from 'primeng/card';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
 import {TableModule} from 'primeng/table';
+import { AdminAddComponent } from './component/popup/admin-add/admin-add.component';
+import { MessagesModule } from 'primeng/messages';
 
 
 
@@ -85,6 +87,7 @@ import {TableModule} from 'primeng/table';
     MyThesisComponent,
     ManageAdminComponent,
     AdminDashboardComponent,
+    AdminAddComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,7 +97,7 @@ import {TableModule} from 'primeng/table';
     DropdownModule,FormsModule,InputTextModule,InputTextModule,ButtonModule,MatMenuModule,MatCardModule,
     ReactiveFormsModule,MatIconModule,MatTableModule,MatButtonModule,NgxPaginationModule,MatDialogModule,AutoCompleteModule,
     SkeletonModule,PaginatorModule,TagModule,Spinner,PasswordModule,FloatLabelModule,DialogModule,CardModule,
-    BreadcrumbModule,TableModule
+    BreadcrumbModule,TableModule,MessagesModule
     
     
   ],

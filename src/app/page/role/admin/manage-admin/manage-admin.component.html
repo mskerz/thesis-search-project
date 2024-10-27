@@ -2,7 +2,7 @@
     <mat-card class="mt-5">
       <mat-card-content>
         <h2>การจัดการผู้ดูแลระบบ</h2>
-        <button class="btn btn-success"> เพิ่ม </button>
+        <button class="btn btn-success" (click)="openAddadminDialog()"> เพิ่ม </button>
         <table mat-table [dataSource]="paginatedData" class="mat-elevation-z8" *ngIf="AdminList">
           <!-- Index Column -->
           <ng-container matColumnDef="idx">
@@ -24,10 +24,8 @@
           <ng-container matColumnDef="management">
             <th mat-header-cell *matHeaderCellDef>จัดการ</th>
             <td mat-cell *matCellDef="let admin">
-                <button class="btn btn-outline-warning">
-                    <span><i class="bi bi-pen"></i> เพิ่ม</span>
-                </button>
-                <button class="btn btn-outline-danger ms-1">
+                
+                <button class="btn btn-outline-danger ms-1" (click)="Delete(admin.user_id)">
                     <span><i class="bi bi-trash-fill"></i> ลบ</span>
                 </button>
             </td>

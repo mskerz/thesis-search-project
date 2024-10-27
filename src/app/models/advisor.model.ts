@@ -5,7 +5,7 @@ export interface Advisor{
     advisor_name:string;
 }
 
-export class ThesisConvert {
+export class Convert {
     public static fromJson_toAdvisor(json: string): Advisor[] {
         return JSON.parse(json);
     }

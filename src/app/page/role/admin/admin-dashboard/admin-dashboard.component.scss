@@ -16,3 +16,19 @@
   ::ng-deep .p-breadcrumb a {
     text-decoration: none;
 }
+
+
+.chart-container {
+  width: 800px;  /* ขนาดความกว้าง */
+  height: 480px; /* ขนาดความสูง */
+}
+
+canvas {
+  width: 100% !important; /* ทำให้ canvas ขยายตามขนาดของ container */
+  height: 100% !important; /* ทำให้ canvas ขยายตามขนาดของ container */
+}
+
+
+.rounded-button {
+  border-radius: 12px; /* ปรับค่าให้เหมาะสมกับความโค้งที่ต้องการ */
+}

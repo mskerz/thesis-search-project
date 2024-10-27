@@ -1,85 +1,92 @@
-<div class="grid">
-    <!-- Header -->
+<div class="container my-2">
+  <div class="mt-5" style="margin-top: 10px">
     <div class="col-12">
-      <div class="card mb-2">
-        <h2>แผงควบคุมผู้ดูแลระบบ</h2>
-        <p-breadcrumb 
-        class="max-w-full text-decoration-none" 
-        [model]="items" 
-        [home]="home" />
+      <div class="mb-2">
+        <h1>แดชบอร์ดของผู้ดูแลระบบ</h1>
+        <p-breadcrumb
+          class="max-w-full text-decoration-none"
+          [model]="items"
+          [home]="home"
+        />
       </div>
     </div>
+    <div class="grid mt-lg-4" *ngIf="adminDashboard">
+      <!-- Header -->
 
-    <!-- Quick Stats Cards -->
-    <div class="col-12 md:col-6 lg:col-3">
-      <div class="card">
-        <div class="flex justify-content-between mb-3">
-          <div>
-            <span class="block text-500 font-medium mb-3">อาจารย์ที่ปรึกษา</span>
-            <div class="text-900 font-medium text-xl">42 คน</div>
+      <div class="row g-4">
+        <div class="col-12 col-md-6 col-lg-2">
+          <div class="card shadow rounded text-center">
+            <h2 class="h5 text-secondary">นิสิต</h2>
+            <p class="display-4 text-success mt-3">
+              {{ adminDashboard.student_count }}
+            </p>
+            <p class="text-muted">คน</p>
           </div>
-          <div class="flex align-items-center justify-content-center bg-blue-100 border-round" style="width:2.5rem;height:2.5rem">
-            <i class="pi pi-users text-blue-500 text-xl"></i>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-2">
+          <div class="card shadow rounded text-center">
+            <h2 class="h5 text-secondary">เอกสารทั้งหมด</h2>
+            <p class="display-4 text-warning mt-3">
+              {{ adminDashboard.doc_count }}
+            </p>
+            <p class="text-muted">เอกสาร</p>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-2">
+          <div class="card shadow rounded text-center">
+            <h2 class="h5 text-secondary">จำนวนศิษย์เก่า</h2>
+            <p class="display-4 text-danger mt-3">
+              {{ adminDashboard.alumni_count }}
+            </p>
+            <p class="text-muted">คน</p>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-2">
+          <div class="card shadow rounded text-center">
+            <h2 class="h5 text-secondary">อาจารย์ที่ปรึกษา</h2>
+            <p class="display-4 text-purple mt-3">
+              {{ adminDashboard.advisor_count }}
+            </p>
+            <p class="text-muted">คน</p>
           </div>
         </div>
       </div>
+
+      <!-- Quick Actions -->
     </div>
-
-    <div class="col-12 md:col-6 lg:col-3">
-      <div class="card">
-        <div class="flex justify-content-between mb-3">
-          <div>
-            <span class="block text-500 font-medium mb-3">เอกสารรอตรวจสอบ</span>
-            <div class="text-900 font-medium text-xl">15 รายการ</div>
-          </div>
-          <div class="flex align-items-center justify-content-center bg-orange-100 border-round" style="width:2.5rem;height:2.5rem">
-            <i class="pi pi-file text-orange-500 text-xl"></i>
-          </div>
-        </div>
+    <div class="col-12 mt-2">
+      <div class="card border-0">
+        <h2>เมนูทางลัด</h2>
+        <div class="flex flex-wrap "> 
+          <p-button label="จัดการผู้ดูแลระบบ" icon="pi pi-user" routerLink="/account/admin/admin-management" styleClass="p-button-rounded"></p-button>
+          <p-button
+            label="จัดการสิทธิ์การใช้งานนิสิต"
+            icon="pi pi-users"
+            styleClass="p-button-success ms-1"
+            routerLink="/account/admin/student"
+          ></p-button>
+          <p-button
+            label="ตรวจสอบเอกสาร"
+            icon="pi pi-file"
+            styleClass="p-button-warning ms-1"
+            routerLink="/account/admin/thesis-upload"
+          ></p-button>
+          <p-button
+            label="จัดการข้อมูลอาจารย์ที่ปรึกษา"
+            icon="pi pi-user-edit"
+            styleClass="p-button-help ms-1"
+            routerLink="/account/admin/advisors-manage"
+          ></p-button>
       </div>
+      
+
+      <!-- เพิ่ม canvas ที่นี่ -->
     </div>
-
-    <div class="col-12 md:col-6 lg:col-3">
-      <div class="card">
-        <div class="flex justify-content-between mb-3">
-          <div>
-            <span class="block text-500 font-medium mb-3">นิสิตทั้งหมด</span>
-            <div class="text-900 font-medium text-xl">30 คน</div>
-          </div>
-          <div class="flex align-items-center justify-content-center bg-cyan-100 border-round" style="width:2.5rem;height:2.5rem">
-            <i class="pi pi-user text-cyan-500 text-xl"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-12 md:col-6 lg:col-3">
-      <div class="card">
-        <div class="flex justify-content-between mb-3">
-          <div>
-            <span class="block text-500 font-medium mb-3">ผู้ดูแลระบบ</span>
-            <div class="text-900 font-medium text-xl">3 คน</div>
-          </div>
-          <div class="flex align-items-center justify-content-center bg-purple-100 border-round" style="width:2.5rem;height:2.5rem">
-            <i class="pi pi-cog text-purple-500 text-xl"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Main Content Area -->
-   
-
-    <!-- Quick Actions -->
-    <div class="col-12">
-      <div class="card">
-        <h5>การดำเนินการด่วน</h5>
-        <div class="flex flex-wrap gap-2">
-          <p-button label="เพิ่มผู้ดูแลระบบ" icon="pi pi-plus"></p-button>
-          <p-button label="จัดการสิทธิ์นิสิต" icon="pi pi-users" styleClass="p-button-success"></p-button>
-          <p-button label="ตรวจสอบเอกสาร" icon="pi pi-file" styleClass="p-button-warning"></p-button>
-          <p-button label="จัดการอาจารย์ที่ปรึกษา" icon="pi pi-user-edit" styleClass="p-button-help"></p-button>
-        </div>
-      </div>
+    <div class="chart-container">
+      <canvas id="lineChart"></canvas>
     </div>
   </div>
+</div>

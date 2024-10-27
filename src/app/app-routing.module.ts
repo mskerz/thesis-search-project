@@ -32,17 +32,17 @@ const routes: Routes = [
     {path: 'register',component:RegisterComponent,title:'สมัครสมาชิก'},
     {path:'account/change-password',component:ChangePasswordComponent,canActivate:[AuthGuard]},
     {path: 'accoount/change-info',component:ChangeInfoComponent,title:'เปลี่ยนข้อมูลส่วนตัว',canActivate:[AuthGuard]},
-    {path:'account/student/import-thesis',component:ImportThesisComponent,title:'นำเข้าปริญญานิพนธ์'},
-    {path:'account/student/thesis',component:MyThesisComponent,title:'ปริญญานิพนธ์ของฉัน'},
+    {path:'account/student/import-thesis',component:ImportThesisComponent,title:'นำเข้าปริญญานิพนธ์',canActivate:[AuthGuard]},
+    {path:'account/student/thesis',component:MyThesisComponent,title:'ปริญญานิพนธ์ของฉัน',canActivate:[AuthGuard]},
     {path:'forgot-password',component:ForgotPasswordSendEmailComponent,title:'ลืมรหัสผ่าน'},
     {path:'send-token',component:ForgotPasswordSendTokenComponent,title:'รหัสยืนยัน'},
     {path:'reset-password', component:ForgotPasswordNewPasswordComponent,title:'ตั้งรหัสผ่านใหม่',canActivate: [ResetPasswordLinkGuard]},
-    {path:'account/admin/advisors-manage',component:ManageAdvisorComponent,title:'อาจารย์ที่ปรึกษาปริญญานิพนธ์'},
-    {path:'account/admin/dashboard',component:AdminDashboardComponent,title:'แดชบอร์ดผู้ดูแลระบบ'},
+    {path:'account/admin/advisors-manage',component:ManageAdvisorComponent,title:'อาจารย์ที่ปรึกษาปริญญานิพนธ์',canActivate:[AuthGuard]},
+    {path:'account/admin/dashboard',component:AdminDashboardComponent,title:'แดชบอร์ดผู้ดูแลระบบ',canActivate:[AuthGuard]},
 
-    {path:'account/admin/admin-management',component:ManageAdminComponent,title:'รายการผู้ดูแลระบบ'},
-    {path:'account/admin/thesis-upload',component:ManageThesisComponent,title:'รายการปริญญานิพนธ์ที่ต้องตรวจสอบ'},
-    {path:'account/admin/student',component:ManageStudentComponent,title:'สิทธิการใช้งาน'}
+    {path:'account/admin/admin-management',component:ManageAdminComponent,title:'รายการผู้ดูแลระบบ',canActivate:[AuthGuard]},
+    {path:'account/admin/thesis-upload',component:ManageThesisComponent,title:'รายการปริญญานิพนธ์ที่ต้องตรวจสอบ',canActivate:[AuthGuard]},
+    {path:'account/admin/student',component:ManageStudentComponent,title:'สิทธิการใช้งาน',canActivate:[AuthGuard]}
   ]}
 ];
 

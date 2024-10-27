@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="border-register col-md-5 col-sm-12 mx-auto" style="margin-top: 94px">
+        <button type="button" class="btn-close" aria-label="Close" (click)="onClose()" style="position: absolute; top: 10px; right: 10px;"></button>
+      <p class="text-center fs-3">
+        <i class="bi bi-person-fill text-success"></i> เพิ่มผู้ดูแลระบบ
+      </p>
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="email">อีเมล</label>
+          <input
+            class="form-control"
+            type="email"
+            [(ngModel)]="form_register_admin.email"
+            [ngModelOptions]="{ standalone: true }"
+            placeholder="กรุณากรอกอีเมล"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">รหัสผ่าน</label><br>
+          <p-password
+            [(ngModel)]="form_register_admin.password"
+            [ngModelOptions]="{ standalone: true }"
+            [feedback]="false"
+            [toggleMask]="true"
+            autocomplete="new-password"
+            placeholder="กรุณากรอกรหัสผ่าน"
+            styleClass="w-100"
+          ></p-password>
+        </div>
+        <div class="form-group">
+          <label for="confirm-password">ยืนยันรหัสผ่าน</label> <br>
+          <p-password
+            [(ngModel)]="form_register_admin.confirm_password"
+            [ngModelOptions]="{ standalone: true }"
+            [feedback]="false"
+            autocomplete="new-password"
+            [toggleMask]="true"
+            placeholder="กรุณายืนยันรหัสผ่าน"
+            styleClass="w-100"
+          ></p-password>
+        </div>
+        <!-- <div class="d-flex flex-row justify-content-between">
+          <div class="grid-item flex-grow-1 me-2">
+            <label for="firstname">ชื่อ</label>
+            <input
+              class="form-control"
+              type="text"
+              [(ngModel)]="form_register_admin.firstname"
+              [ngModelOptions]="{ standalone: true }"
+              placeholder="กรุณากรอกชื่อ"
+              required
+            />
+          </div>
+          <div class="grid-item flex-grow-1">
+            
+            <label for="lastname">นามสกุล</label>
+            <input
+              class="form-control"
+              type="text"
+              [(ngModel)]="form_register_admin.lastname"
+              [ngModelOptions]="{ standalone: true }"
+              placeholder="กรุณากรอกนามสกุล"
+              required
+            />
+          </div>
+        </div> -->
+        <button type="submit" class="btn btn-success d-block mt-3 mx-auto">
+          สมัครสมาชิก
+        </button>
+      </form>
+    </div>
+  </div>

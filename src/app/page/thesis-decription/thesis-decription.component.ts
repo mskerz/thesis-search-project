@@ -52,6 +52,8 @@ export class ThesisDecriptionComponent implements OnInit {
     },
     error => {
        // จัดการเมื่อเกิดข้อผิดพลาด
+       console.error(error);
+       
        Swal.fire({
         icon:'error',
         title:'ขออภัย',
