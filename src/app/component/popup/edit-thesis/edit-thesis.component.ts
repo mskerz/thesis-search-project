@@ -1,6 +1,6 @@
-import { Component, Inject, NgZone, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, NgZone, OnInit, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Advisor } from 'src/app/models/advisor.model';
+import { Advisor, Convert as AdvisorConvert } from 'src/app/models/advisor.model';
 import { ThesisEdit } from 'src/app/models/thesisEdit.model';
 import { AdvisorService } from 'src/app/services/advisor.service';
 import { ThesisService } from 'src/app/services/thesis.service';
@@ -12,6 +12,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./edit-thesis.component.scss'],
 })
 export class EditThesisComponent implements OnInit {
+  @Output() thesisUpdate = new EventEmitter<any>(); // สร้าง EventEmitter
+
   Advisors = Array<Advisor>();
   selected_thesis?: ThesisEdit;
   constructor(
@@ -46,7 +48,7 @@ export class EditThesisComponent implements OnInit {
   advisorFetch() {
     this.advisor.fetchAdvisorAll().subscribe(
       (data) => {
-        this.Advisors = data;
+        this.Advisors = AdvisorConvert.fromJson_toAdvisor(JSON.stringify(data)) ;
       },
       (err) => {
         console.log(err.message);
@@ -81,16 +83,22 @@ export class EditThesisComponent implements OnInit {
     this.thesisService
       .editThesis(ThesisEdit, doc_id)
       .subscribe((res) => {
+         
+        
+        const update ={
+          doc_id:this.selected_thesis!.doc_id,
+          title_th: this.selected_thesis!.title_th,
+          advisor_name:   this.selected_thesis!.advisor_name,
+        }
+        console.log(update);
+        
         if (res.status === 200) {
           Swal.fire({
             icon: 'success',
             title: 'อัปเดตข้อมูลปริญญานิพนธ์สำเร็จ !!',
           }).then(() => {
-            this.ngZone.run(() => {
-
-              
-              this.onClose();
-            });
+            this.thesisUpdate.emit(update)
+            this.onClose();
           });
         }
       });

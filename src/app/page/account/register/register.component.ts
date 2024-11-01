@@ -64,7 +64,7 @@ export class RegisterComponent  {
             icon: 'success',
             text: 'สมัครสมาชิกสำเร็จ',
           }).then(() => {
-            this.router.navigate(['/login']);
+            this.router.navigate(['/login']); 
           });
         }
 

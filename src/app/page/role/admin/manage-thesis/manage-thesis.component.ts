@@ -225,14 +225,26 @@ export class ManageThesisComponent implements OnInit {
   
   
   OpenThesisEditDialog(doc_id:number){
-    this.dialog.open(EditThesisComponent,{
+    const dialogRef = this.dialog.open(EditThesisComponent,{
       width:'800px',
       data:{ docId: doc_id },
       disableClose:true
-    }).afterClosed().subscribe(res=>{
-      this.cdr.detectChanges();
-      this.Fetch();
-      this.updatePagination();
+    }) 
+
+
+    dialogRef.componentInstance.thesisUpdate.subscribe((update)=>{
+      const index = this.ThesisUploadList.findIndex(thesis => thesis.doc_id === update.doc_id);
+      if (index !== -1) {
+        
+        this.ThesisUploadList[index] = {
+          ...this.ThesisUploadList[index],
+          title_th:update.title_th,
+          advisor_name: update.advisor_name
+        } // อัปเดตข้อมูลอาจารย์ที่ปรึกษาในอาเรย์
+            console.log('Updated advisor:', this.ThesisUploadList[index].advisor_name); // ตรวจสอบค่าที่อัปเดต
+
+        this.updatePagination(); // เรียกใช้ฟังก์ชันเพื่อตรวจสอบการแบ่งหน้า
+      }
     })
   }
 
@@ -253,7 +265,11 @@ export class ManageThesisComponent implements OnInit {
             icon:'success',
             title:'ลบปริญญานิพนธ์นี้เรียบร้อยแล้ว'
           })
-          this.Fetch();
+          this.ThesisUploadList = this.ThesisUploadList.filter(
+            (thesis) => thesis.doc_id !== doc_id
+          )
+          this.totalRecords = this.ThesisUploadList.length; // อัปเดตจำนวนรวมของผู้ดูแลระบบ
+          this.updatePagination();
       },(err)=>{
         console.error("Error with Delete Fail: " + err);
         Swal.fire({

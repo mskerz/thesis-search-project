@@ -5,7 +5,9 @@ export interface ThesisEdit{
     title_th:string;
     title_en:string;
     advisor_id:number;
+    advisor_name :string;
     year:number;
+
 
 }
 

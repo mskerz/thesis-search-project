@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
 @Component({
@@ -10,7 +11,7 @@ import Swal from 'sweetalert2';
 export class ForgotPasswordSendEmailComponent {
   emailForm: FormGroup;
 
-constructor(private authService: AuthService,private fb: FormBuilder){
+constructor(private authService: AuthService,private fb: FormBuilder,private route:Router){
   this.emailForm = this.fb.group({
     email: ['', [Validators.required, Validators.email, Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)]]
   });
@@ -33,6 +34,8 @@ onSubmit() {
       Swal.fire({
         icon: 'success',
         title:'ระบบได้ส่งลิงก์รีเซ็ตรหัสผ่านไปที่อีเมลของคุณแล้ว ! '
+      }).then(()=>{
+        this.route.navigate(['/login']); 
       })
     }
 

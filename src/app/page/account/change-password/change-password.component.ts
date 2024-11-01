@@ -65,7 +65,7 @@ export class ChangePasswordComponent {
             Swal.fire({
               icon: 'success',
               title: 'แจ้งเตือน',
-              text: res.message,
+              text: 'เปลี่ยนรหัสผ่านเรียบร้อย',
               confirmButtonText: 'ตกลง'
             }).then((result) => {
               if (result.isConfirmed) {

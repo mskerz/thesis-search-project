@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   returnUrl = ''
   form_login ={
     email :'wichasin.s@gmail.com',
-    password: '12345678'
+    password: '12345'
   }
   userRole: number | null = null;
   constructor( private router: Router, private authService: AuthService,        private route: ActivatedRoute,

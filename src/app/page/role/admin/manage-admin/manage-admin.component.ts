@@ -20,7 +20,7 @@ export class ManageAdminComponent implements OnInit {
   paginatedData = Array<Admin>();
   currentPage = 1;
   isDropdownDisabled = false;
-  displayedColumns: string[] = ['idx', 'fullname', 'email', 'management'];
+  displayedColumns: string[] = ['idx', 'fullname', 'email',];
   isEditing: { [user_id: number]: boolean } = {}; // เปลี่ยนเป็น object ที่มีคีย์เป็น number
 
   constructor(

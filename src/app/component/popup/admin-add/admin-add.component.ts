@@ -75,7 +75,7 @@ export class AdminAddComponent {
           };
           Swal.fire({
             icon: 'success',
-            text: 'สมัครสมาชิกสำเร็จ',
+            text: 'เพิ่มผู้ดูแลระบบสำเร็จ',
           }).then(() => {
             this.adminAdded.emit(newAdmin); // ส่งข้อมูล admin ใหม่กลับไปยัง ManageAdminComponent
             this.onClose();

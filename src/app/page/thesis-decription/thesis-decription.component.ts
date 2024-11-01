@@ -54,11 +54,11 @@ export class ThesisDecriptionComponent implements OnInit {
        // จัดการเมื่อเกิดข้อผิดพลาด
        console.error(error);
        
-       Swal.fire({
-        icon:'error',
-        title:'ขออภัย',
-        text: 'ไม่สามารถดาวน์โหลดได้ เนื่องจากไฟล์นี้อาจถูกลบไปแล้ว',
-      })
+      //  Swal.fire({
+      //   icon:'error',
+      //   title:'ขออภัย',
+      //   text: 'ไม่สามารถดาวน์โหลดได้ เนื่องจากไฟล์นี้อาจถูกลบไปแล้ว',
+      // })
     }
   );
  }
